@@ -533,37 +533,6 @@ if st.session_state.search_triggered:
                                 """)
                 
                 st.markdown("")  # Spacing between cards
-                
-                # Action buttons
-                col_contact, col_maps, col_info = st.columns([1.5, 1.5, 1.5], gap="small")
-                
-                with col_contact:
-                    st.markdown(f"""
-                    <a href="tel:{hospital['phone'].replace('+91-', '').replace('-', '')}" class="btn-primary">
-                        ☎️ Call Now
-                    </a>
-                    """, unsafe_allow_html=True)
-                
-                with col_maps:
-                    st.markdown(f"""
-                    <a href="{hospital['google_maps_link']}" target="_blank" class="btn-secondary">
-                        📍 Get Directions
-                    </a>
-                    """, unsafe_allow_html=True)
-                
-                with col_info:
-                    if st.button(f"ℹ️ Details", key=f"info_{hospital_id}_{idx}"):
-                        with st.expander("Hospital Information", expanded=True):
-                            st.write(f"""
-                            **Hospital Name:** {hospital['name']}  
-                            **Address:** {hospital['address']}  
-                            **Phone:** {hospital['phone']}  
-                            **Verification:** {stock_row['verification_status'].replace('_', ' ').title()}  
-                            **Last Verified:** {stock_row['update_time'][:10]}  
-                            **Data Source:** {stock_row['source']}
-                            """)
-                
-                st.markdown("---")
 
 # ===== FOOTER SECTION =====
 st.markdown("""
