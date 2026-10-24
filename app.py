@@ -279,6 +279,25 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
     }
     
+    /* Blood Component Breakdown */
+    .component-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+        margin: 15px 0;
+    }
+    
+    .component-item {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid #dee2e6;
+    }
+    
+    .component-name { font-size: 0.85rem; color: #7f8c8d; margin-bottom: 5px; }
+    .component-units { font-size: 1.4rem; font-weight: 700; color: #c0392b; }
+    
     /* Footer */
     .footer-section {
         background: #2c3e50;
@@ -442,31 +461,44 @@ if st.session_state.search_triggered:
                 
                 # Determine status
                 if stock_row["verification_status"] == "not_verified":
-                    status_badge = '<span class="status-badge status-not-verified">🔲 Not Verified</span>'
+                    status_html = '🔲 Not Verified'
+                    status_class = 'status-not-verified'
                     units_display = "—"
                     progress_pct = 0
                 elif units == 0:
-                    status_badge = '<span class="status-badge status-out">❌ Out of Stock</span>'
+                    status_html = '❌ Out of Stock'
+                    status_class = 'status-out'
                     units_display = "0 units"
                     progress_pct = 0
                 elif units < 5:
-                    status_badge = '<span class="status-badge status-low">⚠️ Low Stock</span>'
+                    status_html = '⚠️ Low Stock'
+                    status_class = 'status-low'
                     units_display = f"{units} units"
                     progress_pct = (units / max_units) * 100
                 else:
-                    status_badge = '<span class="status-badge status-available">✅ Available</span>'
+                    status_html = '✅ Available'
+                    status_class = 'status-available'
                     units_display = f"{units} units"
                     progress_pct = min((units / max_units) * 100, 100)
                 
+                # Build HTML string carefully
+                hospital_name_html = hospital['name']
+                hospital_addr_html = hospital['address']
+                blood_group_html = stock_row['blood_group']
+                component_html = stock_row['component'][:12]
+                expiry_html = stock_row['expiry_date'][:10]
+                updated_html = stock_row['update_time'][:10]
+                source_html = stock_row['source']
+                
                 # Enhanced Hospital Card
-                st.markdown(f"""
+                card_html = f"""
                 <div class="hospital-card">
                     <div class="hospital-header">
                         <div>
-                            <h2 class="hospital-name">{hospital['name']}</h2>
-                            <p class="hospital-location">📍 {hospital['address']}</p>
+                            <h2 class="hospital-name">{hospital_name_html}</h2>
+                            <p class="hospital-location">📍 {hospital_addr_html}</p>
                         </div>
-                        <div>{status_badge}</div>
+                        <div><span class="status-badge {status_class}">{status_html}</span></div>
                     </div>
                     
                     <div class="info-grid">
@@ -474,32 +506,33 @@ if st.session_state.search_triggered:
                             <div class="info-item-label">Stock Level</div>
                             <div class="info-item-value">{units_display}</div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: {progress_pct}%"></div>
+                                <div class="progress-fill" style="width: {progress_pct}%;"></div>
                             </div>
                         </div>
                         <div class="info-item">
                             <div class="info-item-label">Blood Group</div>
-                            <div class="info-item-value">{stock_row['blood_group']}</div>
+                            <div class="info-item-value">{blood_group_html}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-item-label">Component</div>
-                            <div class="info-item-value">{stock_row['component'][:12]}</div>
+                            <div class="info-item-value">{component_html}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-item-label">Expiry Date</div>
-                            <div class="info-item-value">{stock_row['expiry_date'][:10]}</div>
+                            <div class="info-item-value">{expiry_html}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-item-label">Last Updated</div>
-                            <div class="info-item-value">{stock_row['update_time'][:10]}</div>
+                            <div class="info-item-value">{updated_html}</div>
                         </div>
                         <div class="info-item">
                             <div class="info-item-label">Data Source</div>
-                            <div class="info-item-value">{stock_row['source']}</div>
+                            <div class="info-item-value">{source_html}</div>
                         </div>
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
+                """
+                st.markdown(card_html, unsafe_allow_html=True)
                 
                 # Action buttons
                 col_contact, col_maps, col_info = st.columns([1.5, 1.5, 1.5], gap="small")
