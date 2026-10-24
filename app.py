@@ -451,88 +451,88 @@ if st.session_state.search_triggered:
                 units = int(stock_row["units_available"])
                 max_units = 30  # For progress bar
                 
-                hospital = {
-                    "name": stock_row["name"],
-                    "address": stock_row["address"],
-                    "district": stock_row["district"],
-                    "phone": stock_row["phone"],
-                    "google_maps_link": stock_row["google_maps_link"]
-                }
+                hospital_name = stock_row["name"]
+                hospital_addr = stock_row["address"]
+                phone = stock_row["phone"]
+                maps_link = stock_row["google_maps_link"]
                 
                 # Determine status
                 if stock_row["verification_status"] == "not_verified":
-                    status_html = '🔲 Not Verified'
-                    status_class = 'status-not-verified'
+                    status_text = '🔲 Not Verified'
                     units_display = "—"
                     progress_pct = 0
                 elif units == 0:
-                    status_html = '❌ Out of Stock'
-                    status_class = 'status-out'
+                    status_text = '❌ Out of Stock'
                     units_display = "0 units"
                     progress_pct = 0
                 elif units < 5:
-                    status_html = '⚠️ Low Stock'
-                    status_class = 'status-low'
+                    status_text = '⚠️ Low Stock'
                     units_display = f"{units} units"
                     progress_pct = (units / max_units) * 100
                 else:
-                    status_html = '✅ Available'
-                    status_class = 'status-available'
+                    status_text = '✅ Available'
                     units_display = f"{units} units"
                     progress_pct = min((units / max_units) * 100, 100)
                 
-                # Build HTML string carefully
-                hospital_name_html = hospital['name']
-                hospital_addr_html = hospital['address']
-                blood_group_html = stock_row['blood_group']
-                component_html = stock_row['component'][:12]
-                expiry_html = stock_row['expiry_date'][:10]
-                updated_html = stock_row['update_time'][:10]
-                source_html = stock_row['source']
-                
-                # Enhanced Hospital Card
-                card_html = f"""
-                <div class="hospital-card">
-                    <div class="hospital-header">
-                        <div>
-                            <h2 class="hospital-name">{hospital_name_html}</h2>
-                            <p class="hospital-location">📍 {hospital_addr_html}</p>
-                        </div>
-                        <div><span class="status-badge {status_class}">{status_html}</span></div>
-                    </div>
+                # Use Streamlit native components
+                with st.container(border=True):
+                    # Header with name and status
+                    col_name, col_status = st.columns([3, 1])
+                    with col_name:
+                        st.markdown(f"### {hospital_name}")
+                        st.markdown(f"📍 {hospital_addr}")
+                    with col_status:
+                        st.markdown(f"#### {status_text}")
                     
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-item-label">Stock Level</div>
-                            <div class="info-item-value">{units_display}</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: {progress_pct}%;"></div>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-item-label">Blood Group</div>
-                            <div class="info-item-value">{blood_group_html}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-item-label">Component</div>
-                            <div class="info-item-value">{component_html}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-item-label">Expiry Date</div>
-                            <div class="info-item-value">{expiry_html}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-item-label">Last Updated</div>
-                            <div class="info-item-value">{updated_html}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-item-label">Data Source</div>
-                            <div class="info-item-value">{source_html}</div>
-                        </div>
-                    </div>
-                </div>
-                """
-                st.markdown(card_html, unsafe_allow_html=True)
+                    st.divider()
+                    
+                    # Info grid using columns
+                    grid_col1, grid_col2, grid_col3 = st.columns(3)
+                    
+                    with grid_col1:
+                        st.metric("Stock Level", units_display, delta=None)
+                        st.progress(progress_pct / 100 if progress_pct > 0 else 0)
+                    
+                    with grid_col2:
+                        st.metric("Blood Group", stock_row['blood_group'])
+                        st.metric("Component", stock_row['component'][:12])
+                    
+                    with grid_col3:
+                        st.metric("Expiry", stock_row['expiry_date'][:10])
+                        st.metric("Updated", stock_row['update_time'][:10])
+                    
+                    st.divider()
+                    
+                    # Action buttons
+                    btn_col1, btn_col2, btn_col3 = st.columns(3)
+                    
+                    with btn_col1:
+                        st.link_button(
+                            "☎️ Call Now",
+                            f"tel:{phone.replace('+91-', '').replace('-', '')}",
+                            use_container_width=True
+                        )
+                    
+                    with btn_col2:
+                        st.link_button(
+                            "📍 Get Directions",
+                            maps_link,
+                            use_container_width=True
+                        )
+                    
+                    with btn_col3:
+                        if st.button(f"ℹ️ Details", key=f"info_{hospital_id}_{idx}", use_container_width=True):
+                            with st.expander("Hospital Information", expanded=True):
+                                st.write(f"""
+                                **Hospital Name:** {hospital_name}  
+                                **Address:** {hospital_addr}  
+                                **Phone:** {phone}  
+                                **Verification:** {stock_row['verification_status'].replace('_', ' ').title()}  
+                                **Last Verified:** {stock_row['update_time'][:10]}  
+                                **Data Source:** {stock_row['source']}
+                                """)
+                
+                st.markdown("")  # Spacing between cards
                 
                 # Action buttons
                 col_contact, col_maps, col_info = st.columns([1.5, 1.5, 1.5], gap="small")
