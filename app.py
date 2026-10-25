@@ -2,6 +2,19 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 import math
+import requests
+
+def send_telegram_alert(message):
+    url = f"https://api.telegram.org/bot{st.secrets['TELEGRAM_BOT_TOKEN']}/sendMessage"
+    try:
+        r = requests.post(url, data={
+            "chat_id": st.secrets["TELEGRAM_CHAT_ID"],
+            "text": message,
+            "parse_mode": "HTML",
+        }, timeout=10)
+        return r.ok
+    except requests.RequestException:
+        return False
 
 # Page config
 st.set_page_config(
@@ -332,12 +345,57 @@ st.markdown("""
 # Import data
 from data_demo import BLOOD_BANKS, BLOOD_STOCK, KERALA_DISTRICTS, BLOOD_GROUPS, BLOOD_COMPONENTS
 
-# Initialize session state
-if "search_triggered" not in st.session_state:
-    st.session_state.search_triggered = False
-if "selected_hospital" not in st.session_state:
-    st.session_state.selected_hospital = None
+# ===== TELEGRAM LOW-STOCK ALERT =====
+import html
 
+LOW_THRESHOLD = 5
+
+@st.cache_resource
+def _sent_alerts():
+    return set()
+
+def check_low_stock(force=False):
+    merged = BLOOD_STOCK.merge(BLOOD_BANKS, left_on="hospital_id", right_on="id", how="inner")
+    merged = merged[merged["verification_status"] != "not_verified"]
+    low = merged[merged["units_available"] < LOW_THRESHOLD].sort_values("units_available")
+    if low.empty:
+        return "none"
+
+    signature = str(sorted(zip(low["hospital_id"], low["blood_group"],
+                               low["component"], low["units_available"])))
+    sent = _sent_alerts()
+    if signature in sent and not force:
+        return "already_sent"
+
+    lines = []
+    for _, r in low.head(15).iterrows():
+        units = int(r["units_available"])
+        tag = "OUT" if units == 0 else f"{units} left"
+        lines.append(f"• {html.escape(str(r['name']))}: <b>{r['blood_group']}</b> "
+                     f"{html.escape(str(r['component']))} - {tag}")
+    extra = len(low) - 15
+    msg = "🩸 <b>HEMOTRACK Low Blood Alert</b>\n\n" + "\n".join(lines)
+    if extra > 0:
+        msg += f"\n…and {extra} more"
+    msg += "\n\nPlease arrange donors urgently."
+
+    if send_telegram_alert(msg):
+        sent.add(signature)
+        return "sent"
+    return "failed"
+
+alert_status = check_low_stock()
+
+with st.sidebar:
+    st.markdown("### 🔔 Telegram Alerts")
+    if st.button("Send low-stock alert now"):
+        res = check_low_stock(force=True)
+        if res == "sent":
+            st.success("Alert sent to Telegram!")
+        elif res == "none":
+            st.info("No low-stock items right now.")
+        else:
+            st.error("Could not send. Check the secrets.")
 # ===== HEADER SECTION =====
 st.markdown("""
     <div class="header-section">
@@ -552,3 +610,8 @@ st.markdown("""
         </p>
     </div>
 """, unsafe_allow_html=True)
+if st.button("Send test alert"):
+    if send_telegram_alert("🩸 Test alert from HemoTrack"):
+        st.success("Sent!")
+    else:
+        st.error("Failed")
