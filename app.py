@@ -3,19 +3,17 @@ import pandas as pd
 from datetime import datetime
 import math
 import requests
-
 def send_telegram_alert(message):
-    url = f"https://api.telegram.org/bot{st.secrets['TELEGRAM_BOT_TOKEN']}/sendMessage"
     try:
+        url = f"https://api.telegram.org/bot{st.secrets['TELEGRAM_BOT_TOKEN']}/sendMessage"
         r = requests.post(url, data={
             "chat_id": st.secrets["TELEGRAM_CHAT_ID"],
             "text": message,
             "parse_mode": "HTML",
         }, timeout=10)
         return r.ok
-    except requests.RequestException:
+    except Exception:
         return False
-
 # Page config
 st.set_page_config(
     page_title="HEMOTRACK - Real-Time Blood Availability in Kerala",
@@ -344,7 +342,8 @@ st.markdown("""
 
 # Import data
 from data_demo import BLOOD_BANKS, BLOOD_STOCK, KERALA_DISTRICTS, BLOOD_GROUPS, BLOOD_COMPONENTS
-
+if "search_triggered" not in st.session_state:
+    st.session_state.search_triggered = False
 # ===== TELEGRAM LOW-STOCK ALERT =====
 import html
 
