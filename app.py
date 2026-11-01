@@ -590,7 +590,7 @@ h1, h2, h3 {
 # =========================================================
 
 # HEMOTRACK HEADER
-st.markdown("""
+st.html("""
 <div class="header-section">
     <h1>🩸 HEMOTRACK</h1>
     <p>Real-Time Blood Availability in Kerala</p>
@@ -612,24 +612,7 @@ st.markdown("""
         </div>
     </div>
 </div>
-""", unsafe_allow_html=True)
-
-
-# DEMO MODE NOTICE
-st.markdown(
-    '<div class="demo-badge">'
-    '⚠️ DEMO MODE — Sample data for testing. '
-    'Always confirm availability before visiting.'
-    '</div>',
-    unsafe_allow_html=True
-)
-
-
-# MODEL STATUS
-if ML_AVAILABLE:
-    st.success("XGBoost threshold model loaded successfully.")
-else:
-    st.error(f"XGBoost model could not be loaded: {ML_ERROR}")
+""")
 
 
 # =========================================================
@@ -1050,9 +1033,8 @@ if st.session_state.search_triggered:
 # FOOTER SECTION
 # =========================================================
 
-
 # HEMOTRACK FOOTER
-st.markdown("""
+st.html("""
 <div class="footer-section">
 
     <h3>🩸 HEMOTRACK - Blood Bank Finder</h3>
@@ -1086,12 +1068,10 @@ st.markdown("""
             © 2026 HEMOTRACK.
             In partnership with Government of India - Blood Bank Directory
         </small>
-
     </p>
 
 </div>
-""", unsafe_allow_html=True)
-
+""")
 
 # =========================================================
 # TELEGRAM TEST ALERT
