@@ -1,23 +1,15 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
 import math
 import requests
-import json
+import html
 from pathlib import Path
 from xgboost import XGBRegressor
-def send_telegram_alert(message):
-    try:
-        url = f"https://api.telegram.org/bot{st.secrets['TELEGRAM_BOT_TOKEN']}/sendMessage"
-        r = requests.post(url, data={
-            "chat_id": st.secrets["TELEGRAM_CHAT_ID"],
-            "text": message,
-            "parse_mode": "HTML",
-        }, timeout=10)
-        return r.ok
-    except Exception:
-        return False
-# Page config
+
+# =========================================================
+# PAGE CONFIGURATION
+# =========================================================
+
 st.set_page_config(
     page_title="HEMOTRACK - Real-Time Blood Availability in Kerala",
     page_icon="🩸",
@@ -25,335 +17,59 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS - Enhanced Beautiful Design
-st.markdown("""
-    <style>
-    /* Main Colors */
-    :root {
-        --primary: #c0392b;
-        --primary-light: #e74c3c;
-        --success: #27ae60;
-        --warning: #f39c12;
-        --danger: #e74c3c;
-        --info: #3498db;
-        --light: #ecf0f1;
-        --dark: #2c3e50;
-    }
-    
-    /* Typography */
-    h1, h2, h3 { color: var(--dark); font-weight: 700; }
-    
-    /* Header Section */
-    .header-section {
-        background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-        padding: 50px 30px;
-        border-radius: 15px;
-        color: white;
-        margin-bottom: 40px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(192, 57, 43, 0.2);
-    }
-    
-    .header-section h1 { 
-        margin: 0; 
-        font-size: 3rem; 
-        font-weight: 800;
-        letter-spacing: -1px;
-    }
-    
-    .header-section p { 
-        margin: 15px 0 0 0; 
-        font-size: 1.2rem; 
-        opacity: 0.95;
-        font-weight: 300;
-    }
-    
-    .header-stats {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 30px;
-        gap: 20px;
-    }
-    
-    .stat-box {
-        background: rgba(255, 255, 255, 0.15);
-        padding: 15px 25px;
-        border-radius: 10px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .stat-box-num { font-size: 2.5rem; font-weight: 800; }
-    .stat-box-label { font-size: 0.9rem; opacity: 0.8; margin-top: 5px; }
-    
-    /* Filter Section */
-    .filter-section {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        padding: 30px;
-        border-radius: 12px;
-        margin-bottom: 30px;
-        border: 1px solid #dee2e6;
-    }
-    
-    /* Hospital Card */
-    .hospital-card {
-        background: white;
-        border: 1px solid #e0e0e0;
-        border-radius: 12px;
-        padding: 25px;
-        margin: 15px 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .hospital-card:hover {
-        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        transform: translateY(-2px);
-        border-color: #c0392b;
-    }
-    
-    .hospital-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 15px;
-    }
-    
-    .hospital-name {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--dark);
-        margin: 0;
-    }
-    
-    .hospital-location {
-        font-size: 0.95rem;
-        color: #7f8c8d;
-        margin-top: 5px;
-    }
-    
-    /* Status Badge */
-    .status-badge {
-        display: inline-block;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.9rem;
-    }
-    
-    .status-available {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-    
-    .status-low {
-        background: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffeaa7;
-    }
-    
-    .status-out {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-    
-    .status-not-verified {
-        background: #e2e3e5;
-        color: #383d41;
-        border: 1px solid #d6d8db;
-    }
-    
-    /* Info Grid */
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
-        margin: 20px 0;
-    }
-    
-    .info-item {
-        background: #f8f9fa;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 4px solid #c0392b;
-    }
-    
-    .info-item-label {
-        font-size: 0.8rem;
-        color: #7f8c8d;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-    }
-    
-    .info-item-value {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--dark);
-    }
-    
-    /* Progress Bar */
-    .progress-bar {
-        width: 100%;
-        height: 8px;
-        background: #e0e0e0;
-        border-radius: 4px;
-        overflow: hidden;
-        margin-top: 8px;
-    }
-    
-    .progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
-        border-radius: 4px;
-        transition: width 0.3s ease;
-    }
-    
-    /* Action Buttons */
-    .action-buttons {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-        flex-wrap: wrap;
-    }
-    
-    .btn-primary {
-        background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .btn-primary:hover {
-        box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
-        transform: translateY(-2px);
-    }
-    
-    .btn-secondary {
-        background: white;
-        color: var(--dark);
-        padding: 10px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        border: 2px solid #c0392b;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .btn-secondary:hover {
-        background: #f5f5f5;
-    }
-    
-    /* Stats Section */
-    .stats-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-    
-    .stat-card {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        border-left: 4px solid #c0392b;
-    }
-    
-    .stat-card h3 { margin: 0 0 10px 0; color: #7f8c8d; font-size: 0.9rem; }
-    .stat-card .number { font-size: 2.5rem; font-weight: 800; color: #c0392b; }
-    
-    /* Demo Badge */
-    .demo-badge {
-        display: inline-block;
-        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
-    }
-    
-    /* Blood Component Breakdown */
-    .component-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 12px;
-        margin: 15px 0;
-    }
-    
-    .component-item {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-        border: 1px solid #dee2e6;
-    }
-    
-    .component-name { font-size: 0.85rem; color: #7f8c8d; margin-bottom: 5px; }
-    .component-units { font-size: 1.4rem; font-weight: 700; color: #c0392b; }
-    
-    /* Footer */
-    .footer-section {
-        background: #2c3e50;
-        color: white;
-        padding: 30px;
-        border-radius: 10px;
-        margin-top: 40px;
-        text-align: center;
-    }
-    
-    .footer-section p { margin: 5px 0; opacity: 0.8; }
-    
-    /* Animations */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .hospital-card {
-        animation: fadeIn 0.3s ease-out;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .header-section h1 { font-size: 2rem; }
-        .header-stats { flex-direction: column; }
-        .info-grid { grid-template-columns: 1fr 1fr; }
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# Import data
-from data_demo import BLOOD_BANKS, BLOOD_STOCK, KERALA_DISTRICTS, BLOOD_GROUPS, BLOOD_COMPONENTS
-# ==========================================
-# XGBOOST ML THRESHOLD INTEGRATION
-# ==========================================
+# =========================================================
+# FILE PATHS
+# =========================================================
 
 BASE_DIR = Path(__file__).parent
 
 MODEL_FILE = BASE_DIR / "xgboost_threshold_model.json"
 METADATA_FILE = BASE_DIR / "xgboost_threshold_metadata.json"
 TRAINING_FILE = BASE_DIR / "threshold_training_targets.csv"
+
+# =========================================================
+# TELEGRAM ALERT FUNCTION
+# =========================================================
+
+def send_telegram_alert(message):
+    try:
+        url = (
+            f"https://api.telegram.org/bot"
+            f"{st.secrets['TELEGRAM_BOT_TOKEN']}/sendMessage"
+        )
+
+        response = requests.post(
+            url,
+            data={
+                "chat_id": st.secrets["TELEGRAM_CHAT_ID"],
+                "text": message,
+                "parse_mode": "HTML"
+            },
+            timeout=10
+        )
+
+        return response.ok
+
+    except Exception:
+        return False
+
+
+# =========================================================
+# IMPORT DEMO DATA
+# =========================================================
+
+from data_demo import (
+    BLOOD_BANKS,
+    BLOOD_STOCK,
+    KERALA_DISTRICTS,
+    BLOOD_GROUPS,
+    BLOOD_COMPONENTS
+)
+
+
+# =========================================================
+# XGBOOST MODEL CONFIGURATION
+# =========================================================
 
 FEATURE_COLUMNS = [
     "mean_demand",
@@ -382,16 +98,12 @@ BLOOD_GROUP_FEATURES = [
 MODEL_FEATURES = FEATURE_COLUMNS + BLOOD_GROUP_FEATURES
 
 
-def normalize_blood_group(value):
-    """Convert Unicode minus signs into standard minus signs."""
-    return str(value).strip().replace("−", "-")
+# =========================================================
+# HOSPITAL NAME MAPPING
+# =========================================================
 
+# App hospital name : Training CSV hospital name
 
-def normalize_hospital(value):
-    return " ".join(str(value).lower().strip().split())
-
-
-# Explicit mappings between app hospital names and training names.
 HOSPITAL_MAPPING = {
     "Ernakulam General Hospital Blood Bank":
         "Ernakulam General Hospital",
@@ -419,62 +131,112 @@ HOSPITAL_MAPPING = {
 }
 
 
+def normalize_blood_group(value):
+    """Convert Unicode minus signs to normal minus signs."""
+    return str(value).strip().replace("−", "-")
+
+
 def get_training_hospital(app_hospital):
-    """Return the confirmed training hospital name."""
+    """Find the corresponding hospital in the training dataset."""
     return HOSPITAL_MAPPING.get(str(app_hospital).strip())
 
 
+# =========================================================
+# LOAD XGBOOST MODEL
+# =========================================================
+
 @st.cache_resource
 def load_xgboost_model():
+
+    if not MODEL_FILE.exists():
+        raise FileNotFoundError(
+            "xgboost_threshold_model.json was not found."
+        )
+
     model = XGBRegressor()
     model.load_model(str(MODEL_FILE))
+
     return model
 
 
+# =========================================================
+# LOAD TRAINING CSV
+# =========================================================
+
 @st.cache_data
 def load_threshold_data():
+
+    if not TRAINING_FILE.exists():
+        raise FileNotFoundError(
+            "threshold_training_targets.csv was not found."
+        )
+
     df = pd.read_csv(TRAINING_FILE)
 
-    required = (
+    required_columns = (
         ["hospital", "blood_group", "threshold_target"]
         + FEATURE_COLUMNS
     )
 
-    missing = [col for col in required if col not in df.columns]
+    missing_columns = [
+        col for col in required_columns
+        if col not in df.columns
+    ]
 
-    if missing:
+    if missing_columns:
         raise ValueError(
-            f"Missing columns in training CSV: {missing}"
+            f"Missing columns in training CSV: {missing_columns}"
         )
+
+    df["hospital"] = df["hospital"].astype(str).str.strip()
 
     df["blood_group"] = df["blood_group"].apply(
         normalize_blood_group
     )
 
+    for col in FEATURE_COLUMNS:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    df = df.dropna(
+        subset=FEATURE_COLUMNS + ["hospital", "blood_group"]
+    ).copy()
+
     return df
 
 
-def build_threshold_lookup():
+# =========================================================
+# GENERATE ML-PREDICTED THRESHOLDS
+# =========================================================
+
+@st.cache_data
+def get_ml_threshold_table():
 
     model = load_xgboost_model()
     training_df = load_threshold_data()
 
+    # Select the ten numerical input features.
     X = training_df[FEATURE_COLUMNS].copy()
 
-    # Create the eight blood-group one-hot features.
+    # Create the eight blood-group one-hot columns.
     for column in BLOOD_GROUP_FEATURES:
         X[column] = 0
 
+    # Assign 1 to the corresponding blood group.
     for index, row in training_df.iterrows():
-        bg = normalize_blood_group(row["blood_group"])
-        column = f"blood_group_{bg}"
 
-        if column in X.columns:
-            X.loc[index, column] = 1
+        blood_group = normalize_blood_group(
+            row["blood_group"]
+        )
 
-    # Ensure exact model feature order.
+        feature_name = f"blood_group_{blood_group}"
+
+        if feature_name in BLOOD_GROUP_FEATURES:
+            X.loc[index, feature_name] = 1
+
+    # Arrange all 18 features in the model's expected order.
     X = X[MODEL_FEATURES]
 
+    # Predict thresholds using XGBoost.
     predictions = model.predict(X)
 
     result = training_df[
@@ -489,32 +251,35 @@ def build_threshold_lookup():
     return result
 
 
-@st.cache_data
-def get_ml_threshold_table():
-    return build_threshold_lookup()
-
+# =========================================================
+# ADD ML THRESHOLDS TO HOSPITAL STOCK DATA
+# =========================================================
 
 def add_ml_threshold(data):
 
     data = data.copy()
 
-    # Match app hospital names to training hospital names.
+    # Map application hospital names to training names.
     data["training_hospital"] = data["name"].apply(
         get_training_hospital
     )
 
+    # Normalize blood groups before matching.
     data["normalized_blood_group"] = (
         data["blood_group"].apply(normalize_blood_group)
     )
 
-    thresholds = get_ml_threshold_table().copy()
+    threshold_table = get_ml_threshold_table().copy()
 
-    thresholds["normalized_blood_group"] = (
-        thresholds["blood_group"].apply(normalize_blood_group)
+    threshold_table["normalized_blood_group"] = (
+        threshold_table["blood_group"].apply(
+            normalize_blood_group
+        )
     )
 
+    # Match hospital and blood group.
     data = data.merge(
-        thresholds[
+        threshold_table[
             [
                 "hospital",
                 "normalized_blood_group",
@@ -532,15 +297,53 @@ def add_ml_threshold(data):
         how="left"
     )
 
-    data.drop(columns=["hospital"], inplace=True, errors="ignore")
+    data.drop(
+        columns=["hospital"],
+        inplace=True,
+        errors="ignore"
+    )
 
     return data
+
+
+# =========================================================
+# LOAD ML DATA SAFELY
+# =========================================================
+
+try:
+
+    ML_THRESHOLD_DATA = get_ml_threshold_table()
+    ML_AVAILABLE = True
+    ML_ERROR = None
+
+except Exception as error:
+
+    ML_THRESHOLD_DATA = pd.DataFrame()
+    ML_AVAILABLE = False
+    ML_ERROR = str(error)
+
+
+# =========================================================
+# SESSION STATE
+# =========================================================
+
 if "search_triggered" not in st.session_state:
     st.session_state.search_triggered = False
-# ===== TELEGRAM LOW-STOCK ALERT =====
-import html
+
+
+# =========================================================
+# TELEGRAM LOW-STOCK ALERT SYSTEM
+# =========================================================
+
+@st.cache_resource
+def _sent_alerts():
+    return set()
+
 
 def check_low_stock(force=False):
+
+    if not ML_AVAILABLE:
+        return "model_error"
 
     merged = BLOOD_STOCK.merge(
         BLOOD_BANKS,
@@ -549,17 +352,19 @@ def check_low_stock(force=False):
         how="inner"
     )
 
+    # Ignore unverified stock.
     merged = merged[
         merged["verification_status"] != "not_verified"
     ]
 
     merged = add_ml_threshold(merged)
 
-    # Only hospitals with a valid ML prediction are evaluated.
+    # Consider only records with a predicted threshold.
     merged = merged.dropna(
         subset=["predicted_threshold"]
     )
 
+    # Compare stock against the ML threshold.
     low = merged[
         merged["units_available"] <
         merged["predicted_threshold"]
@@ -583,119 +388,285 @@ def check_low_stock(force=False):
 
     lines = []
 
-    for _, r in low.head(15).iterrows():
+    for _, row in low.head(15).iterrows():
 
-        units = int(r["units_available"])
-        threshold = int(r["predicted_threshold"])
+        units = int(row["units_available"])
+        threshold = int(row["predicted_threshold"])
 
-        tag = "OUT" if units == 0 else f"{units} left"
+        tag = "OUT OF STOCK" if units == 0 else f"{units} units left"
 
         lines.append(
-            f"• {html.escape(str(r['name']))}: "
-            f"<b>{r['blood_group']}</b> "
-            f"{html.escape(str(r['component']))} - "
+            f"• {html.escape(str(row['name']))}: "
+            f"<b>{html.escape(str(row['blood_group']))}</b> "
+            f"{html.escape(str(row['component']))} - "
             f"{tag} "
-            f"(ML threshold: {threshold})"
+            f"(ML threshold: {threshold} units)"
         )
 
     extra = len(low) - 15
 
-    msg = (
+    message = (
         "🩸 <b>HEMOTRACK ML Low Blood Alert</b>\n\n"
         + "\n".join(lines)
     )
 
     if extra > 0:
-        msg += f"\n…and {extra} more"
+        message += f"\n…and {extra} more"
 
-    msg += "\n\nPlease arrange donors urgently."
+    message += "\n\nPlease arrange donors urgently."
 
-    if send_telegram_alert(msg):
+    if send_telegram_alert(message):
         sent.add(signature)
         return "sent"
 
     return "failed"
 
-@st.cache_resource
-def _sent_alerts():
-    return set()
 
-def check_low_stock(force=False):
-    merged = BLOOD_STOCK.merge(BLOOD_BANKS, left_on="hospital_id", right_on="id", how="inner")
-    merged = merged[merged["verification_status"] != "not_verified"]
-    low = merged[merged["units_available"] < LOW_THRESHOLD].sort_values("units_available")
-    if low.empty:
-        return "none"
-
-    signature = str(sorted(zip(low["hospital_id"], low["blood_group"],
-                               low["component"], low["units_available"])))
-    sent = _sent_alerts()
-    if signature in sent and not force:
-        return "already_sent"
-
-    lines = []
-    for _, r in low.head(15).iterrows():
-        units = int(r["units_available"])
-        tag = "OUT" if units == 0 else f"{units} left"
-        lines.append(f"• {html.escape(str(r['name']))}: <b>{r['blood_group']}</b> "
-                     f"{html.escape(str(r['component']))} - {tag}")
-    extra = len(low) - 15
-    msg = "🩸 <b>HEMOTRACK Low Blood Alert</b>\n\n" + "\n".join(lines)
-    if extra > 0:
-        msg += f"\n…and {extra} more"
-    msg += "\n\nPlease arrange donors urgently."
-
-    if send_telegram_alert(msg):
-        sent.add(signature)
-        return "sent"
-    return "failed"
-
+# Check low stock automatically.
 alert_status = check_low_stock()
 
+
+# =========================================================
+# SIDEBAR - TELEGRAM ALERTS
+# =========================================================
+
 with st.sidebar:
+
     st.markdown("### 🔔 Telegram Alerts")
+
     if st.button("Send low-stock alert now"):
-        res = check_low_stock(force=True)
-        if res == "sent":
+
+        result = check_low_stock(force=True)
+
+        if result == "sent":
             st.success("Alert sent to Telegram!")
-        elif res == "none":
-            st.info("No low-stock items right now.")
+
+        elif result == "none":
+            st.info("No ML low-stock items right now.")
+
+        elif result == "model_error":
+            st.error("ML model is unavailable.")
+
         else:
-            st.error("Could not send. Check the secrets.")
-# ===== HEADER SECTION =====
+            st.error("Could not send. Check Telegram secrets.")
+
+
+# =========================================================
+# CUSTOM CSS
+# =========================================================
+
 st.markdown("""
-    <div class="header-section">
-        <h1>🩸 HEMOTRACK</h1>
-        <p>Real-Time Blood Availability in Kerala</p>
-        <div class="header-stats">
-            <div class="stat-box">
-                <div class="stat-box-num">15</div>
-                <div class="stat-box-label">Blood Banks (Ernakulam)</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-box-num">8</div>
-                <div class="stat-box-label">Blood Groups</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-box-num">4</div>
-                <div class="stat-box-label">Components</div>
-            </div>
-        </div>
-    </div>
+<style>
+
+:root {
+    --primary: #c0392b;
+    --dark: #2c3e50;
+}
+
+h1, h2, h3 {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+.header-section {
+    background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+    padding: 50px 30px;
+    border-radius: 15px;
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(192, 57, 43, 0.2);
+}
+
+.header-section h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+}
+
+.header-section p {
+    margin: 15px 0 0 0;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.header-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.stat-box {
+    background: rgba(255,255,255,0.15);
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.stat-box-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.stat-box-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.filter-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid #dee2e6;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-left: 4px solid #c0392b;
+}
+
+.stat-card h3 {
+    margin: 0 0 10px 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.stat-card .number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #c0392b;
+}
+
+.demo-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.footer-section {
+    background: #2c3e50;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.footer-section h3 {
+    color: white;
+}
+
+.footer-section p {
+    color: white;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .header-section h1 {
+        font-size: 2rem;
+    }
+
+    .header-stats {
+        flex-direction: column;
+    }
+}
+
+</style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="demo-badge">⚠️ DEMO MODE — Sample data for testing. Always confirm availability before visiting.</div>', unsafe_allow_html=True)
 
-# ===== FILTER SECTION =====
-st.markdown('<div class="filter-section">', unsafe_allow_html=True)
+# =========================================================
+# HEADER SECTION
+# =========================================================
+
+st.markdown("""
+<div class="header-section">
+
+    <h1>🩸 HEMOTRACK</h1>
+
+    <p>Real-Time Blood Availability in Kerala</p>
+
+    <div class="header-stats">
+
+        <div class="stat-box">
+            <div class="stat-box-num">15</div>
+            <div class="stat-box-label">Blood Banks (Ernakulam)</div>
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-box-num">8</div>
+            <div class="stat-box-label">Blood Groups</div>
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-box-num">4</div>
+            <div class="stat-box-label">Components</div>
+        </div>
+
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+st.markdown(
+    '<div class="demo-badge">'
+    '⚠️ DEMO MODE — Sample data for testing. '
+    'Always confirm availability before visiting.'
+    '</div>',
+    unsafe_allow_html=True
+)
+
+
+# Show model status.
+if ML_AVAILABLE:
+
+    st.success(
+        "XGBoost threshold model loaded successfully."
+    )
+
+else:
+
+    st.error(
+        f"XGBoost model could not be loaded: {ML_ERROR}"
+    )
+
+
+# =========================================================
+# SEARCH FILTER SECTION
+# =========================================================
+
+st.markdown(
+    '<div class="filter-section">',
+    unsafe_allow_html=True
+)
+
 st.markdown("## 🔍 Search Blood Availability")
 
 col1, col2, col3, col4 = st.columns(4, gap="medium")
 
 with col1:
-    state = st.selectbox("🗺️ State", ["Kerala"], disabled=True, label_visibility="collapsed")
+
+    state = st.selectbox(
+        "🗺️ State",
+        ["Kerala"],
+        disabled=True,
+        label_visibility="collapsed"
+    )
 
 with col2:
+
     district = st.selectbox(
         "📍 District",
         ["Select District..."] + KERALA_DISTRICTS,
@@ -704,6 +675,7 @@ with col2:
     )
 
 with col3:
+
     blood_group = st.selectbox(
         "🩸 Blood Group",
         ["Select Blood Group..."] + BLOOD_GROUPS[1:],
@@ -712,6 +684,7 @@ with col3:
     )
 
 with col4:
+
     component = st.selectbox(
         "🧪 Component",
         ["Select Component..."] + BLOOD_COMPONENTS[1:],
@@ -719,165 +692,457 @@ with col4:
         index=0
     )
 
-# Search and Reset buttons
-col_search1, col_search2, col_search3 = st.columns([2, 1, 1], gap="small")
+
+col_search1, col_search2, col_search3 = st.columns(
+    [2, 1, 1],
+    gap="small"
+)
+
 with col_search1:
-    if st.button("🔎 Search Blood Availability", use_container_width=True, type="primary"):
+
+    if st.button(
+        "🔎 Search Blood Availability",
+        use_container_width=True,
+        type="primary"
+    ):
         st.session_state.search_triggered = True
+
 with col_search2:
-    if st.button("🔄 Reset", use_container_width=True):
+
+    if st.button(
+        "🔄 Reset",
+        use_container_width=True
+    ):
         st.session_state.search_triggered = False
         st.rerun()
 
-st.markdown('</div>', unsafe_allow_html=True)
 
-# ===== RESULTS SECTION =====
+st.markdown(
+    '</div>',
+    unsafe_allow_html=True
+)
+
+
+# =========================================================
+# RESULTS SECTION
+# =========================================================
+
 if st.session_state.search_triggered:
-    if district == "Select District..." or blood_group == "Select Blood Group..." or component == "Select Component...":
+
+    if (
+        district == "Select District..."
+        or blood_group == "Select Blood Group..."
+        or component == "Select Component..."
+    ):
+
         st.error("❌ Please complete all selections to search")
-        st.info("💡 Select District, Blood Group, and Blood Component")
+
+        st.info(
+            "💡 Select District, Blood Group, and Blood Component"
+        )
+
     else:
-        # Merge and filter data
-        merged_data = BLOOD_STOCK.merge(BLOOD_BANKS, left_on="hospital_id", right_on="id", how="inner")
-        filtered_stock = merged_data[
-            (merged_data["district"] == district) &
-            (merged_data["blood_group"] == blood_group) &
-            (merged_data["component"] == component)
-        ]
-        
-        if filtered_stock.empty:
-            col1, col2 = st.columns([1, 1])
-            with col1:
-                st.warning(f"❌ No {blood_group} {component} available in {district}")
-            with col2:
-                st.info("💡 Try a different district or blood component")
+
+        # Merge hospital and stock data.
+        merged_data = BLOOD_STOCK.merge(
+            BLOOD_BANKS,
+            left_on="hospital_id",
+            right_on="id",
+            how="inner"
+        )
+
+        # Add XGBoost threshold predictions.
+        if ML_AVAILABLE:
+            merged_data = add_ml_threshold(merged_data)
+
         else:
-            # Stats Section
+            merged_data["predicted_threshold"] = pd.NA
+
+        # Apply selected filters.
+        filtered_stock = merged_data[
+            (merged_data["district"] == district)
+            & (merged_data["blood_group"] == blood_group)
+            & (merged_data["component"] == component)
+        ].copy()
+
+        if filtered_stock.empty:
+
+            col1, col2 = st.columns([1, 1])
+
+            with col1:
+                st.warning(
+                    f"❌ No {blood_group} {component} available in {district}"
+                )
+
+            with col2:
+                st.info(
+                    "💡 Try a different district or blood component"
+                )
+
+        else:
+
+            # =================================================
+            # STATISTICS
+            # =================================================
+
             hospital_ids = filtered_stock["hospital_id"].unique()
-            available_count = len(filtered_stock[filtered_stock["units_available"] > 0])
-            
-            st.markdown(f"### 📊 Results: {blood_group} • {component} • {district}")
-            
+
+            available_count = len(
+                filtered_stock[
+                    filtered_stock["units_available"] > 0
+                ]
+            )
+
+            st.markdown(
+                f"### 📊 Results: {blood_group} • "
+                f"{component} • {district}"
+            )
+
             stat_col1, stat_col2, stat_col3 = st.columns(3)
+
             with stat_col1:
-                st.markdown(f'<div class="stat-card"><h3>Hospitals</h3><div class="number">{len(hospital_ids)}</div></div>', unsafe_allow_html=True)
+
+                st.markdown(
+                    f'<div class="stat-card">'
+                    f'<h3>Hospitals</h3>'
+                    f'<div class="number">{len(hospital_ids)}</div>'
+                    f'</div>',
+                    unsafe_allow_html=True
+                )
+
             with stat_col2:
-                st.markdown(f'<div class="stat-card"><h3>In Stock</h3><div class="number">{available_count}</div></div>', unsafe_allow_html=True)
+
+                st.markdown(
+                    f'<div class="stat-card">'
+                    f'<h3>In Stock</h3>'
+                    f'<div class="number">{available_count}</div>'
+                    f'</div>',
+                    unsafe_allow_html=True
+                )
+
             with stat_col3:
+
                 total_units = filtered_stock["units_available"].sum()
-                st.markdown(f'<div class="stat-card"><h3>Total Units</h3><div class="number">{total_units}</div></div>', unsafe_allow_html=True)
-            
+
+                st.markdown(
+                    f'<div class="stat-card">'
+                    f'<h3>Total Units</h3>'
+                    f'<div class="number">{total_units}</div>'
+                    f'</div>',
+                    unsafe_allow_html=True
+                )
+
             st.markdown("---")
-            
-            # Display each hospital with enhanced design
-            for idx, (_, stock_row) in enumerate(filtered_stock.sort_values("units_available", ascending=False).iterrows()):
+
+
+            # =================================================
+            # HOSPITAL CARDS
+            # =================================================
+
+            for idx, (_, stock_row) in enumerate(
+                filtered_stock.sort_values(
+                    "units_available",
+                    ascending=False
+                ).iterrows()
+            ):
+
                 hospital_id = stock_row["hospital_id"]
+
                 units = int(stock_row["units_available"])
-                max_units = 30  # For progress bar
-                
+
+                max_units = 30
+
                 hospital_name = stock_row["name"]
                 hospital_addr = stock_row["address"]
                 phone = stock_row["phone"]
                 maps_link = stock_row["google_maps_link"]
-                
-                # Determine status
+
+                ml_threshold = stock_row["predicted_threshold"]
+
+
+                # ---------------------------------------------
+                # DETERMINE STOCK STATUS
+                # ---------------------------------------------
+
                 if stock_row["verification_status"] == "not_verified":
-                    status_text = '🔲 Not Verified'
+
+                    status_text = "🔲 Not Verified"
                     units_display = "—"
                     progress_pct = 0
+
                 elif units == 0:
-                    status_text = '❌ Out of Stock'
+
+                    status_text = "❌ Out of Stock"
                     units_display = "0 units"
                     progress_pct = 0
-                elif units < 5:
-                    status_text = '⚠️ Low Stock'
+
+                elif pd.isna(ml_threshold):
+
+                    status_text = "⚪ ML Threshold Unavailable"
                     units_display = f"{units} units"
-                    progress_pct = (units / max_units) * 100
+
+                    progress_pct = min(
+                        (units / max_units) * 100,
+                        100
+                    )
+
+                elif units < ml_threshold:
+
+                    status_text = "⚠️ Low Stock"
+                    units_display = f"{units} units"
+
+                    progress_pct = min(
+                        (units / max_units) * 100,
+                        100
+                    )
+
                 else:
-                    status_text = '✅ Available'
+
+                    status_text = "✅ Available"
                     units_display = f"{units} units"
-                    progress_pct = min((units / max_units) * 100, 100)
-                
-                # Use Streamlit native components
+
+                    progress_pct = min(
+                        (units / max_units) * 100,
+                        100
+                    )
+
+
+                # ---------------------------------------------
+                # HOSPITAL CARD
+                # ---------------------------------------------
+
                 with st.container(border=True):
-                    # Header with name and status
+
                     col_name, col_status = st.columns([3, 1])
+
                     with col_name:
+
                         st.markdown(f"### {hospital_name}")
+
                         st.markdown(f"📍 {hospital_addr}")
+
                     with col_status:
+
                         st.markdown(f"#### {status_text}")
-                    
+
                     st.divider()
-                    
-                    # Info grid using columns
+
+
+                    # -----------------------------------------
+                    # HOSPITAL INFORMATION
+                    # -----------------------------------------
+
                     grid_col1, grid_col2, grid_col3 = st.columns(3)
-                    
+
                     with grid_col1:
-                        st.metric("Stock Level", units_display, delta=None)
-                        st.progress(progress_pct / 100 if progress_pct > 0 else 0)
-                    
+
+                        st.metric(
+                            "Stock Level",
+                            units_display
+                        )
+
+                        st.progress(
+                            progress_pct / 100
+                            if progress_pct > 0
+                            else 0
+                        )
+
+                        if stock_row["verification_status"] == "not_verified":
+
+                            st.metric(
+                                "ML Predicted Threshold",
+                                "Not verified"
+                            )
+
+                        elif pd.notna(ml_threshold):
+
+                            st.metric(
+                                "ML Predicted Threshold",
+                                f"{int(ml_threshold)} units"
+                            )
+
+                        else:
+
+                            st.metric(
+                                "ML Predicted Threshold",
+                                "Unavailable"
+                            )
+
+
                     with grid_col2:
-                        st.metric("Blood Group", stock_row['blood_group'])
-                        st.metric("Component", stock_row['component'][:12])
-                    
-                    with grid_col3:
-                        st.metric("Expiry", stock_row['expiry_date'][:10])
-                        st.metric("Updated", stock_row['update_time'][:10])
-                    
-                    st.divider()
-                    
-                    # Action buttons
+
+                        st.metric(
+                            "Blood Group",
+                            stock_row["blood_group"]
+                        )
+
+                        st.metric(
+                            "Component",
+                            stock_row["component"][:12]
+                        )
+
+
+                                       with btn_col3:
+                        if st.button(
+                            "ℹ️ Details",
+                            key=f"info_{hospital_id}_{idx}",
+                            use_container_width=True
+                        ):
+                            verification = (
+                                str(stock_row["verification_status"])
+                                .replace("_", " ")
+                                .title()
+                            )
+
+                            if pd.notna(stock_row.get("predicted_threshold")):
+                                threshold_display = (
+                                    f"{int(stock_row['predicted_threshold'])} units"
+                                )
+                            else:
+                                threshold_display = "Unavailable"
+
+                            st.info(
+                                f"""
+                                **Hospital Name:** {hospital_name}
+
+                                **Address:** {hospital_addr}
+
+                                **Phone:** {phone}
+
+                                **Verification:** {verification}
+
+                                **Last Updated:** {str(stock_row['update_time'])[:10]}
+
+                                **Data Source:** {stock_row['source']}
+
+                                **ML Predicted Threshold:** {threshold_display}
+                                """
+                            )
+
+                    # -----------------------------------------
+                    # ACTION BUTTONS
+                    # -----------------------------------------
+
                     btn_col1, btn_col2, btn_col3 = st.columns(3)
-                    
+
                     with btn_col1:
+
+                        cleaned_phone = (
+                            str(phone)
+                            .replace("+91-", "")
+                            .replace("-", "")
+                        )
+
                         st.link_button(
                             "☎️ Call Now",
-                            f"tel:{phone.replace('+91-', '').replace('-', '')}",
+                            f"tel:{cleaned_phone}",
                             use_container_width=True
                         )
-                    
+
+
                     with btn_col2:
+
                         st.link_button(
                             "📍 Get Directions",
                             maps_link,
                             use_container_width=True
                         )
-                    
-                    with btn_col3:
-                        if st.button(f"ℹ️ Details", key=f"info_{hospital_id}_{idx}", use_container_width=True):
-                            with st.expander("Hospital Information", expanded=True):
-                                st.write(f"""
-                                **Hospital Name:** {hospital_name}  
-                                **Address:** {hospital_addr}  
-                                **Phone:** {phone}  
-                                **Verification:** {stock_row['verification_status'].replace('_', ' ').title()}  
-                                **Last Verified:** {stock_row['update_time'][:10]}  
-                                **Data Source:** {stock_row['source']}
-                                """)
-                
-                st.markdown("")  # Spacing between cards
 
-# ===== FOOTER SECTION =====
+
+                    with btn_col3:
+
+                        if st.button(
+                            "ℹ️ Details",
+                            key=f"info_{hospital_id}_{idx}",
+                            use_container_width=True
+                        ):
+
+                            st.info(
+                                f"""
+                                **Hospital Name:** {hospital_name}
+
+                                **Address:** {hospital_addr}
+
+                                **Phone:** {phone}
+
+                                **Verification:** {
+                                    str(stock_row['verification_status'])
+                                    .replace('_', ' ')
+                                    .title()
+                                }
+
+                                **Last Updated:** {
+                                    str(stock_row['update_time'])[:10]
+                                }
+
+                                **Data Source:** {stock_row['source']}
+
+                                **ML Threshold:** {
+                                    int(ml_threshold)
+                                    if pd.notna(ml_threshold)
+                                    else "Unavailable"
+                                }
+                                """
+                            )
+
+                st.markdown("")
+
+
+# =========================================================
+# FOOTER SECTION
+# =========================================================
+
 st.markdown("""
-    <div class="footer-section">
-        <h3>🩸 HEMOTRACK - Blood Bank Finder</h3>
-        <p><strong>Data Source:</strong> eRaktKosh (Demo Mode)</p>
-        <p><strong>Coverage:</strong> Kerala - Currently Ernakulam (15 hospitals)</p>
-        <p><strong>⚠️ Important Disclaimer:</strong></p>
-        <p style="font-size: 0.9rem; margin: 10px 0;">
-            This is a <strong>DEMO application</strong> for testing and demonstration purposes only.  
-            Always confirm blood availability <strong>directly with the blood bank</strong> by calling them before visiting.  
-            Stock levels may change throughout the day. Arriving at a blood bank without confirmation may result in disappointment.
-        </p>
-        <p style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
-            Built with ❤️ using Streamlit | Data: eRaktKosh Portal  
-            <br><small>© 2026 HEMOTRACK. In partnership with Government of India - Blood Bank Directory</small>
-        </p>
-    </div>
+<div class="footer-section">
+
+    <h3>🩸 HEMOTRACK - Blood Bank Finder</h3>
+
+    <p><strong>Data Source:</strong> eRaktKosh (Demo Mode)</p>
+
+    <p><strong>Coverage:</strong> Kerala - Currently Ernakulam (15 hospitals)</p>
+
+    <p><strong>⚠️ Important Disclaimer:</strong></p>
+
+    <p style="font-size: 0.9rem; margin: 10px 0;">
+        This is a <strong>DEMO application</strong> for testing and
+        demonstration purposes only.
+
+        Always confirm blood availability
+        <strong>directly with the blood bank</strong>
+        by calling them before visiting.
+
+        Stock levels may change throughout the day.
+    </p>
+
+    <p style="margin-top: 20px;
+              border-top: 1px solid rgba(255,255,255,0.2);
+              padding-top: 15px;">
+
+        Built with ❤️ using Streamlit | Data: eRaktKosh Portal
+
+        <br>
+
+        <small>
+            © 2026 HEMOTRACK.
+            In partnership with Government of India - Blood Bank Directory
+        </small>
+
+    </p>
+
+</div>
 """, unsafe_allow_html=True)
+
+
+# =========================================================
+# TELEGRAM TEST ALERT
+# =========================================================
+
 if st.button("Send test alert"):
+
     if send_telegram_alert("🩸 Test alert from HemoTrack"):
-        st.success("Sent!")
+
+        st.success("Test alert sent successfully!")
+
     else:
-        st.error("Failed")
+
+        st.error("Failed to send test alert. Check Telegram secrets.")
