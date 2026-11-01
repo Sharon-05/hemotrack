@@ -593,15 +593,13 @@ h1, h2, h3 {
 # HEADER SECTION
 # =========================================================
 
+# HEMOTRACK HEADER
 st.markdown("""
 <div class="header-section">
-
     <h1>🩸 HEMOTRACK</h1>
-
     <p>Real-Time Blood Availability in Kerala</p>
 
     <div class="header-stats">
-
         <div class="stat-box">
             <div class="stat-box-num">15</div>
             <div class="stat-box-label">Blood Banks (Ernakulam)</div>
@@ -616,13 +614,12 @@ st.markdown("""
             <div class="stat-box-num">4</div>
             <div class="stat-box-label">Components</div>
         </div>
-
     </div>
-
 </div>
 """, unsafe_allow_html=True)
 
 
+# DEMO MODE NOTICE
 st.markdown(
     '<div class="demo-badge">'
     '⚠️ DEMO MODE — Sample data for testing. '
@@ -632,18 +629,11 @@ st.markdown(
 )
 
 
-# Show model status.
+# MODEL STATUS
 if ML_AVAILABLE:
-
-    st.success(
-        "XGBoost threshold model loaded successfully."
-    )
-
+    st.success("XGBoost threshold model loaded successfully.")
 else:
-
-    st.error(
-        f"XGBoost model could not be loaded: {ML_ERROR}"
-    )
+    st.error(f"XGBoost model could not be loaded: {ML_ERROR}")
 
 
 # =========================================================
