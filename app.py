@@ -279,26 +279,24 @@ def get_ml_threshold_table():
 # ADD ML AND FALLBACK THRESHOLDS TO HOSPITAL STOCK DATA
 # =========================================================
 
+# ADD ML THRESHOLDS FOR ALL HOSPITALS
+# =========================================================
+
 def add_ml_threshold(data):
 
     data = data.copy()
 
     # Map application hospital names to training names.
-
     data["training_hospital"] = data["name"].apply(
         get_training_hospital
     )
 
     # Normalize blood groups.
-
     data["normalized_blood_group"] = (
-        data["blood_group"].apply(
-            normalize_blood_group
-        )
+        data["blood_group"].apply(normalize_blood_group)
     )
 
-    # Get predictions from the existing trained model.
-
+    # Get existing model predictions and feature data.
     threshold_table = get_ml_threshold_table().copy()
 
     threshold_table["normalized_blood_group"] = (
@@ -307,49 +305,92 @@ def add_ml_threshold(data):
         )
     )
 
-    # Get hospital-specific thresholds.
+    # Get the trained model and historical feature data.
+    model = load_xgboost_model()
+    training_data = load_threshold_data().copy()
 
+    # Keep only the model's required input features.
+    feature_columns = NUMERIC_FEATURES + BLOOD_GROUP_FEATURES
+
+    # Generate hospital-specific thresholds from existing predictions.
     hospital_thresholds = (
         threshold_table
         .groupby(
-            [
-                "hospital",
-                "normalized_blood_group"
-            ],
+            ["hospital", "normalized_blood_group"],
             as_index=False
         )["predicted_threshold"]
         .median()
-    )
-
-    hospital_thresholds.rename(
-        columns={
+        .rename(columns={
             "hospital": "training_hospital",
             "predicted_threshold": "specific_threshold"
-        },
-        inplace=True
+        })
     )
 
-    # Calculate fallback thresholds separately
-    # for each blood group using existing predictions.
-
-    fallback_thresholds = (
-        hospital_thresholds
-        .groupby("normalized_blood_group")[
-            "specific_threshold"
-        ]
+    # Build feature profiles for every blood group.
+    # These profiles use median historical feature values.
+    feature_profiles = (
+        training_data
+        .groupby("blood_group")[NUMERIC_FEATURES]
         .median()
         .reset_index()
     )
 
-    fallback_thresholds.rename(
-        columns={
-            "specific_threshold": "fallback_threshold"
-        },
-        inplace=True
+    # Create one prediction for every hospital and blood group.
+    hospitals = data[
+        ["name", "training_hospital"]
+    ].drop_duplicates()
+
+    blood_groups = data[
+        ["normalized_blood_group"]
+    ].drop_duplicates()
+
+    prediction_rows = hospitals.merge(
+        blood_groups,
+        how="cross"
     )
 
-    # Merge hospital-specific thresholds.
+    # Match each blood group to its historical feature profile.
+    prediction_rows = prediction_rows.merge(
+        feature_profiles,
+        left_on="normalized_blood_group",
+        right_on="blood_group",
+        how="left"
+    )
 
+    # Create one-hot blood group features.
+    for column in BLOOD_GROUP_FEATURES:
+        prediction_rows[column] = 0
+
+    for index, row in prediction_rows.iterrows():
+
+        blood_group = row["normalized_blood_group"]
+
+        feature_name = "blood_group_" + blood_group
+
+        if feature_name in BLOOD_GROUP_FEATURES:
+            prediction_rows.loc[index, feature_name] = 1
+
+    # Prepare model input.
+    X_new = prediction_rows[feature_columns].copy()
+
+    # Handle missing feature values using available medians.
+    X_new = X_new.fillna(
+        training_data[NUMERIC_FEATURES].median()
+    )
+
+    # Predict thresholds using the existing trained model.
+    prediction_rows["generated_threshold"] = model.predict(
+        X_new
+    )
+
+    # Thresholds must be non-negative whole numbers.
+    prediction_rows["generated_threshold"] = (
+        prediction_rows["generated_threshold"]
+        .clip(lower=0)
+        .apply(lambda value: int(round(value)))
+    )
+
+    # Merge hospital-specific predictions first.
     data = data.merge(
         hospital_thresholds,
         on=[
@@ -359,32 +400,37 @@ def add_ml_threshold(data):
         how="left"
     )
 
-    # Merge fallback thresholds by blood group.
+    # Merge newly generated model predictions.
+    generated_thresholds = prediction_rows[
+        [
+            "name",
+            "normalized_blood_group",
+            "generated_threshold"
+        ]
+    ]
 
     data = data.merge(
-        fallback_thresholds,
-        on="normalized_blood_group",
+        generated_thresholds,
+        on=["name", "normalized_blood_group"],
         how="left"
     )
 
-    # Prefer hospital-specific predictions.
-    # Otherwise use the blood-group fallback.
-
+    # Prefer the existing hospital-specific prediction.
+    # Otherwise use the newly generated XGBoost prediction.
     data["predicted_threshold"] = (
         data["specific_threshold"].combine_first(
-            data["fallback_threshold"]
+            data["generated_threshold"]
         )
     )
 
-    # Identify the threshold source.
-
+    # Identify the prediction source.
     data["threshold_source"] = "Hospital-specific ML"
 
     data.loc[
         data["specific_threshold"].isna()
-        & data["fallback_threshold"].notna(),
+        & data["generated_threshold"].notna(),
         "threshold_source"
-    ] = "Fallback estimate"
+    ] = "XGBoost generated estimate"
 
     data.loc[
         data["predicted_threshold"].isna(),
@@ -392,17 +438,17 @@ def add_ml_threshold(data):
     ] = "Unavailable"
 
     # Remove temporary columns.
-
     data.drop(
         columns=[
             "specific_threshold",
-            "fallback_threshold"
+            "generated_threshold"
         ],
         inplace=True,
         errors="ignore"
     )
 
     return data
+
 
 
 # =========================================================
