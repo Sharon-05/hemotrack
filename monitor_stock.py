@@ -265,10 +265,6 @@ def make_alert_key(row):
 # SEND TELEGRAM MESSAGE
 # =========================================================
 
-# =========================================================
-# SEND TELEGRAM MESSAGE
-# =========================================================
-
 def send_telegram_alert(message):
 
     token = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -279,24 +275,42 @@ def send_telegram_alert(message):
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
 
-    response = requests.post(
-        url,
-        data={
-            "chat_id": chat_id,
-            "text": message,
-            "parse_mode": "HTML"
-        },
-        timeout=20
-    )
+    # Split long messages into smaller messages
+    max_length = 3500
+    messages = []
 
-    # Read Telegram's response
-    result = response.json()
+    while len(message) > max_length:
+        split_position = message.rfind("\n\n", 0, max_length)
 
-    if not result.get("ok"):
-        print("Telegram API error:", result.get("description"))
-        raise RuntimeError("Telegram rejected the alert message.")
+        if split_position == -1:
+            split_position = max_length
 
-    print("Telegram message sent successfully.")
+        messages.append(message[:split_position])
+        message = message[split_position:].strip()
+
+    if message:
+        messages.append(message)
+
+    # Send each message separately
+    for index, part in enumerate(messages, start=1):
+
+        response = requests.post(
+            url,
+            data={
+                "chat_id": chat_id,
+                "text": part,
+                "parse_mode": "HTML"
+            },
+            timeout=20
+        )
+
+        result = response.json()
+
+        if not result.get("ok"):
+            print("Telegram API error:", result.get("description"))
+            raise RuntimeError("Telegram rejected the alert message.")
+
+        print(f"Telegram alert part {index}/{len(messages)} sent successfully.")
 
 # =========================================================
 # MAIN MONITORING FUNCTION
