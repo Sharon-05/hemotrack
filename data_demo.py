@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime, timedelta
+from pathlib import Path
 
 # Blood groups and components
 BLOOD_GROUPS = ["All Blood Groups", "A+", "A−", "B+", "B−", "AB+", "AB−", "O+", "O−"]
@@ -288,4 +289,21 @@ BLOOD_STOCK_LIST.extend([
     {"hospital_id": "BB008", "blood_group": "O+", "component": "Packed Red Blood Cells", "units_available": 13, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
 ])
 
-BLOOD_STOCK = pd.DataFrame(BLOOD_STOCK_LIST)
+# =========================================================
+# PERSISTENT DEMO STOCK
+# =========================================================
+
+DEMO_STOCK_FILE = Path(__file__).parent / "demo_stock.csv"
+
+if DEMO_STOCK_FILE.exists():
+
+    # Read the previously saved stock values.
+    BLOOD_STOCK = pd.read_csv(DEMO_STOCK_FILE)
+
+else:
+
+    # Generate demo stock only once.
+    BLOOD_STOCK = pd.DataFrame(BLOOD_STOCK_LIST)
+
+    # Save it so future runs use the same values.
+    BLOOD_STOCK.to_csv(DEMO_STOCK_FILE, index=False)
