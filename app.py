@@ -102,8 +102,6 @@ MODEL_FEATURES = FEATURE_COLUMNS + BLOOD_GROUP_FEATURES
 # HOSPITAL NAME MAPPING
 # =========================================================
 
-# App hospital name : Training CSV hospital name
-
 HOSPITAL_MAPPING = {
     "Ernakulam General Hospital Blood Bank":
         "Ernakulam General Hospital",
@@ -214,14 +212,13 @@ def get_ml_threshold_table():
     model = load_xgboost_model()
     training_df = load_threshold_data()
 
-    # Select the ten numerical input features.
     X = training_df[FEATURE_COLUMNS].copy()
 
     # Create the eight blood-group one-hot columns.
     for column in BLOOD_GROUP_FEATURES:
         X[column] = 0
 
-    # Assign 1 to the corresponding blood group.
+    # Assign 1 to the matching blood group.
     for index, row in training_df.iterrows():
 
         blood_group = normalize_blood_group(
@@ -236,7 +233,7 @@ def get_ml_threshold_table():
     # Arrange all 18 features in the model's expected order.
     X = X[MODEL_FEATURES]
 
-    # Predict thresholds using XGBoost.
+    # Predict thresholds.
     predictions = model.predict(X)
 
     result = training_df[
@@ -393,7 +390,11 @@ def check_low_stock(force=False):
         units = int(row["units_available"])
         threshold = int(row["predicted_threshold"])
 
-        tag = "OUT OF STOCK" if units == 0 else f"{units} units left"
+        tag = (
+            "OUT OF STOCK"
+            if units == 0
+            else f"{units} units left"
+        )
 
         lines.append(
             f"• {html.escape(str(row['name']))}: "
@@ -932,7 +933,7 @@ if st.session_state.search_triggered:
                     # HOSPITAL INFORMATION
                     # -----------------------------------------
 
-                    grid_col1, grid_col2, grid_col3 = st.columns(3)
+                    grid_col1, grid_col2 = st.columns(2)
 
                     with grid_col1:
 
@@ -978,46 +979,12 @@ if st.session_state.search_triggered:
 
                         st.metric(
                             "Component",
-                            stock_row["component"][:12]
+                            stock_row["component"]
                         )
 
 
-                    with btn_col3:
-                        if st.button(
-                            "ℹ️ Details",
-                            key=f"info_{hospital_id}_{idx}",
-                            use_container_width=True
-                        ):
-                            verification = (
-                                str(stock_row["verification_status"])
-                                .replace("_", " ")
-                                .title()
-                            )
+                    st.divider()
 
-                            if pd.notna(stock_row.get("predicted_threshold")):
-                                threshold_display = (
-                                    f"{int(stock_row['predicted_threshold'])} units"
-                                )
-                            else:
-                                threshold_display = "Unavailable"
-
-                            st.info(
-                                f"""
-                                **Hospital Name:** {hospital_name}
-
-                                **Address:** {hospital_addr}
-
-                                **Phone:** {phone}
-
-                                **Verification:** {verification}
-
-                                **Last Updated:** {str(stock_row['update_time'])[:10]}
-
-                                **Data Source:** {stock_row['source']}
-
-                                **ML Predicted Threshold:** {threshold_display}
-                                """
-                            )
 
                     # -----------------------------------------
                     # ACTION BUTTONS
@@ -1057,6 +1024,19 @@ if st.session_state.search_triggered:
                             use_container_width=True
                         ):
 
+                            verification = (
+                                str(stock_row["verification_status"])
+                                .replace("_", " ")
+                                .title()
+                            )
+
+                            if pd.notna(ml_threshold):
+                                threshold_display = (
+                                    f"{int(ml_threshold)} units"
+                                )
+                            else:
+                                threshold_display = "Unavailable"
+
                             st.info(
                                 f"""
                                 **Hospital Name:** {hospital_name}
@@ -1065,23 +1045,13 @@ if st.session_state.search_triggered:
 
                                 **Phone:** {phone}
 
-                                **Verification:** {
-                                    str(stock_row['verification_status'])
-                                    .replace('_', ' ')
-                                    .title()
-                                }
+                                **Verification:** {verification}
 
-                                **Last Updated:** {
-                                    str(stock_row['update_time'])[:10]
-                                }
+                                **Last Updated:** {str(stock_row['update_time'])[:10]}
 
                                 **Data Source:** {stock_row['source']}
 
-                                **ML Threshold:** {
-                                    int(ml_threshold)
-                                    if pd.notna(ml_threshold)
-                                    else "Unavailable"
-                                }
+                                **ML Predicted Threshold:** {threshold_display}
                                 """
                             )
 
