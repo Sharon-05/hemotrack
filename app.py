@@ -1054,6 +1054,8 @@ if st.session_state.search_triggered:
 # FOOTER SECTION
 # =========================================================
 
+
+# HEMOTRACK FOOTER
 st.markdown("""
 <div class="footer-section">
 
