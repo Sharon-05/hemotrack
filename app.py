@@ -982,7 +982,7 @@ if st.session_state.search_triggered:
                         )
 
 
-                                       with btn_col3:
+                    with btn_col3:
                         if st.button(
                             "ℹ️ Details",
                             key=f"info_{hospital_id}_{idx}",
