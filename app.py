@@ -3,6 +3,9 @@ import pandas as pd
 from datetime import datetime
 import math
 import requests
+import json
+from pathlib import Path
+from xgboost import XGBRegressor
 def send_telegram_alert(message):
     try:
         url = f"https://api.telegram.org/bot{st.secrets['TELEGRAM_BOT_TOKEN']}/sendMessage"
@@ -342,12 +345,276 @@ st.markdown("""
 
 # Import data
 from data_demo import BLOOD_BANKS, BLOOD_STOCK, KERALA_DISTRICTS, BLOOD_GROUPS, BLOOD_COMPONENTS
+# ==========================================
+# XGBOOST ML THRESHOLD INTEGRATION
+# ==========================================
+
+BASE_DIR = Path(__file__).parent
+
+MODEL_FILE = BASE_DIR / "xgboost_threshold_model.json"
+METADATA_FILE = BASE_DIR / "xgboost_threshold_metadata.json"
+TRAINING_FILE = BASE_DIR / "threshold_training_targets.csv"
+
+FEATURE_COLUMNS = [
+    "mean_demand",
+    "demand_std",
+    "demand_p80",
+    "mean_availability",
+    "availability_std",
+    "availability_p20",
+    "mean_received",
+    "mean_future_demand",
+    "future_demand_p80",
+    "shortage_risk_rate"
+]
+
+BLOOD_GROUP_FEATURES = [
+    "blood_group_A+",
+    "blood_group_A-",
+    "blood_group_AB+",
+    "blood_group_AB-",
+    "blood_group_B+",
+    "blood_group_B-",
+    "blood_group_O+",
+    "blood_group_O-"
+]
+
+MODEL_FEATURES = FEATURE_COLUMNS + BLOOD_GROUP_FEATURES
+
+
+def normalize_blood_group(value):
+    """Convert Unicode minus signs into standard minus signs."""
+    return str(value).strip().replace("−", "-")
+
+
+def normalize_hospital(value):
+    return " ".join(str(value).lower().strip().split())
+
+
+# Explicit mappings between app hospital names and training names.
+HOSPITAL_MAPPING = {
+    "Ernakulam General Hospital Blood Bank":
+        "Ernakulam General Hospital",
+
+    "Lakeshore Hospital Blood Bank - Kochi":
+        "Lakeshore Hospital",
+
+    "VPS Lakeshore Hospital Blood Bank":
+        "Lakeshore Hospital",
+
+    "Amrita Institute of Medical Sciences Blood Bank":
+        "Amrita Hospital",
+
+    "Rajagiri Hospital Blood Bank":
+        "Rajagiri Hospital",
+
+    "Sunrise Hospital Blood Bank":
+        "Sunrise Hospital",
+
+    "Lisie Hospital Blood Bank":
+        "Lisie Hospital",
+
+    "Aster Medcity Blood Bank":
+        "Aster Medcity"
+}
+
+
+def get_training_hospital(app_hospital):
+    """Return the confirmed training hospital name."""
+    return HOSPITAL_MAPPING.get(str(app_hospital).strip())
+
+
+@st.cache_resource
+def load_xgboost_model():
+    model = XGBRegressor()
+    model.load_model(str(MODEL_FILE))
+    return model
+
+
+@st.cache_data
+def load_threshold_data():
+    df = pd.read_csv(TRAINING_FILE)
+
+    required = (
+        ["hospital", "blood_group", "threshold_target"]
+        + FEATURE_COLUMNS
+    )
+
+    missing = [col for col in required if col not in df.columns]
+
+    if missing:
+        raise ValueError(
+            f"Missing columns in training CSV: {missing}"
+        )
+
+    df["blood_group"] = df["blood_group"].apply(
+        normalize_blood_group
+    )
+
+    return df
+
+
+def build_threshold_lookup():
+
+    model = load_xgboost_model()
+    training_df = load_threshold_data()
+
+    X = training_df[FEATURE_COLUMNS].copy()
+
+    # Create the eight blood-group one-hot features.
+    for column in BLOOD_GROUP_FEATURES:
+        X[column] = 0
+
+    for index, row in training_df.iterrows():
+        bg = normalize_blood_group(row["blood_group"])
+        column = f"blood_group_{bg}"
+
+        if column in X.columns:
+            X.loc[index, column] = 1
+
+    # Ensure exact model feature order.
+    X = X[MODEL_FEATURES]
+
+    predictions = model.predict(X)
+
+    result = training_df[
+        ["hospital", "blood_group"]
+    ].copy()
+
+    result["predicted_threshold"] = [
+        max(0, int(math.ceil(float(value))))
+        for value in predictions
+    ]
+
+    return result
+
+
+@st.cache_data
+def get_ml_threshold_table():
+    return build_threshold_lookup()
+
+
+def add_ml_threshold(data):
+
+    data = data.copy()
+
+    # Match app hospital names to training hospital names.
+    data["training_hospital"] = data["name"].apply(
+        get_training_hospital
+    )
+
+    data["normalized_blood_group"] = (
+        data["blood_group"].apply(normalize_blood_group)
+    )
+
+    thresholds = get_ml_threshold_table().copy()
+
+    thresholds["normalized_blood_group"] = (
+        thresholds["blood_group"].apply(normalize_blood_group)
+    )
+
+    data = data.merge(
+        thresholds[
+            [
+                "hospital",
+                "normalized_blood_group",
+                "predicted_threshold"
+            ]
+        ],
+        left_on=[
+            "training_hospital",
+            "normalized_blood_group"
+        ],
+        right_on=[
+            "hospital",
+            "normalized_blood_group"
+        ],
+        how="left"
+    )
+
+    data.drop(columns=["hospital"], inplace=True, errors="ignore")
+
+    return data
 if "search_triggered" not in st.session_state:
     st.session_state.search_triggered = False
 # ===== TELEGRAM LOW-STOCK ALERT =====
 import html
 
-LOW_THRESHOLD = 5
+def check_low_stock(force=False):
+
+    merged = BLOOD_STOCK.merge(
+        BLOOD_BANKS,
+        left_on="hospital_id",
+        right_on="id",
+        how="inner"
+    )
+
+    merged = merged[
+        merged["verification_status"] != "not_verified"
+    ]
+
+    merged = add_ml_threshold(merged)
+
+    # Only hospitals with a valid ML prediction are evaluated.
+    merged = merged.dropna(
+        subset=["predicted_threshold"]
+    )
+
+    low = merged[
+        merged["units_available"] <
+        merged["predicted_threshold"]
+    ].sort_values("units_available")
+
+    if low.empty:
+        return "none"
+
+    signature = str(sorted(zip(
+        low["hospital_id"],
+        low["blood_group"],
+        low["component"],
+        low["units_available"],
+        low["predicted_threshold"]
+    )))
+
+    sent = _sent_alerts()
+
+    if signature in sent and not force:
+        return "already_sent"
+
+    lines = []
+
+    for _, r in low.head(15).iterrows():
+
+        units = int(r["units_available"])
+        threshold = int(r["predicted_threshold"])
+
+        tag = "OUT" if units == 0 else f"{units} left"
+
+        lines.append(
+            f"• {html.escape(str(r['name']))}: "
+            f"<b>{r['blood_group']}</b> "
+            f"{html.escape(str(r['component']))} - "
+            f"{tag} "
+            f"(ML threshold: {threshold})"
+        )
+
+    extra = len(low) - 15
+
+    msg = (
+        "🩸 <b>HEMOTRACK ML Low Blood Alert</b>\n\n"
+        + "\n".join(lines)
+    )
+
+    if extra > 0:
+        msg += f"\n…and {extra} more"
+
+    msg += "\n\nPlease arrange donors urgently."
+
+    if send_telegram_alert(msg):
+        sent.add(signature)
+        return "sent"
+
+    return "failed"
 
 @st.cache_resource
 def _sent_alerts():
