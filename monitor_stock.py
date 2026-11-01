@@ -285,12 +285,13 @@ def send_telegram_alert(message):
         timeout=20
     )
 
-    response.raise_for_status()
+   result = response.json()
 
-    result = response.json()
+if not result.get("ok"):
+    print("Telegram API error:", result.get("description"))
+    raise RuntimeError("Telegram rejected the alert message.")
 
-    if not result.get("ok"):
-        raise RuntimeError("Telegram rejected the alert message.")
+print("Telegram message sent successfully.")
 
 
 # =========================================================
