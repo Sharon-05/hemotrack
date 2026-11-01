@@ -267,8 +267,8 @@ def make_alert_key(row):
 
 def send_telegram_alert(message):
 
-    token = os.getenv("7962043549:AAHwPPc-LTl5SxbM353DyN1w-veaMwrDTF0")
-    chat_id = os.getenv("5935929975")
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
     if not token or not chat_id:
         raise RuntimeError("Telegram secrets are not configured.")
