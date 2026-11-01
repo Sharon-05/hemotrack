@@ -265,6 +265,10 @@ def make_alert_key(row):
 # SEND TELEGRAM MESSAGE
 # =========================================================
 
+# =========================================================
+# SEND TELEGRAM MESSAGE
+# =========================================================
+
 def send_telegram_alert(message):
 
     token = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -285,14 +289,14 @@ def send_telegram_alert(message):
         timeout=20
     )
 
-   result = response.json()
+    # Read Telegram's response
+    result = response.json()
 
-if not result.get("ok"):
-    print("Telegram API error:", result.get("description"))
-    raise RuntimeError("Telegram rejected the alert message.")
+    if not result.get("ok"):
+        print("Telegram API error:", result.get("description"))
+        raise RuntimeError("Telegram rejected the alert message.")
 
-print("Telegram message sent successfully.")
-
+    print("Telegram message sent successfully.")
 
 # =========================================================
 # MAIN MONITORING FUNCTION
