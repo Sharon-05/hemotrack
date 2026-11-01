@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import math
@@ -32,6 +33,7 @@ TRAINING_FILE = BASE_DIR / "threshold_training_targets.csv"
 # =========================================================
 
 def send_telegram_alert(message):
+
     try:
         url = (
             f"https://api.telegram.org/bot"
@@ -103,6 +105,7 @@ MODEL_FEATURES = FEATURE_COLUMNS + BLOOD_GROUP_FEATURES
 # =========================================================
 
 HOSPITAL_MAPPING = {
+
     "Ernakulam General Hospital Blood Bank":
         "Ernakulam General Hospital",
 
@@ -131,12 +134,16 @@ HOSPITAL_MAPPING = {
 
 def normalize_blood_group(value):
     """Convert Unicode minus signs to normal minus signs."""
+
     return str(value).strip().replace("−", "-")
 
 
 def get_training_hospital(app_hospital):
     """Find the corresponding hospital in the training dataset."""
-    return HOSPITAL_MAPPING.get(str(app_hospital).strip())
+
+    return HOSPITAL_MAPPING.get(
+        str(app_hospital).strip()
+    )
 
 
 # =========================================================
@@ -147,11 +154,13 @@ def get_training_hospital(app_hospital):
 def load_xgboost_model():
 
     if not MODEL_FILE.exists():
+
         raise FileNotFoundError(
             "xgboost_threshold_model.json was not found."
         )
 
     model = XGBRegressor()
+
     model.load_model(str(MODEL_FILE))
 
     return model
@@ -165,6 +174,7 @@ def load_xgboost_model():
 def load_threshold_data():
 
     if not TRAINING_FILE.exists():
+
         raise FileNotFoundError(
             "threshold_training_targets.csv was not found."
         )
@@ -182,21 +192,31 @@ def load_threshold_data():
     ]
 
     if missing_columns:
+
         raise ValueError(
             f"Missing columns in training CSV: {missing_columns}"
         )
 
-    df["hospital"] = df["hospital"].astype(str).str.strip()
+    df["hospital"] = (
+        df["hospital"].astype(str).str.strip()
+    )
 
-    df["blood_group"] = df["blood_group"].apply(
-        normalize_blood_group
+    df["blood_group"] = (
+        df["blood_group"].apply(normalize_blood_group)
     )
 
     for col in FEATURE_COLUMNS:
-        df[col] = pd.to_numeric(df[col], errors="coerce")
+
+        df[col] = pd.to_numeric(
+            df[col],
+            errors="coerce"
+        )
 
     df = df.dropna(
-        subset=FEATURE_COLUMNS + ["hospital", "blood_group"]
+        subset=FEATURE_COLUMNS + [
+            "hospital",
+            "blood_group"
+        ]
     ).copy()
 
     return df
@@ -210,15 +230,19 @@ def load_threshold_data():
 def get_ml_threshold_table():
 
     model = load_xgboost_model()
+
     training_df = load_threshold_data()
 
     X = training_df[FEATURE_COLUMNS].copy()
 
     # Create the eight blood-group one-hot columns.
+
     for column in BLOOD_GROUP_FEATURES:
+
         X[column] = 0
 
     # Assign 1 to the matching blood group.
+
     for index, row in training_df.iterrows():
 
         blood_group = normalize_blood_group(
@@ -228,12 +252,15 @@ def get_ml_threshold_table():
         feature_name = f"blood_group_{blood_group}"
 
         if feature_name in BLOOD_GROUP_FEATURES:
+
             X.loc[index, feature_name] = 1
 
     # Arrange all 18 features in the model's expected order.
+
     X = X[MODEL_FEATURES]
 
-    # Predict thresholds.
+    # Predict thresholds using the existing model.
+
     predictions = model.predict(X)
 
     result = training_df[
@@ -249,7 +276,7 @@ def get_ml_threshold_table():
 
 
 # =========================================================
-# ADD ML THRESHOLDS TO HOSPITAL STOCK DATA
+# ADD ML AND FALLBACK THRESHOLDS TO HOSPITAL STOCK DATA
 # =========================================================
 
 def add_ml_threshold(data):
@@ -257,14 +284,20 @@ def add_ml_threshold(data):
     data = data.copy()
 
     # Map application hospital names to training names.
+
     data["training_hospital"] = data["name"].apply(
         get_training_hospital
     )
 
-    # Normalize blood groups before matching.
+    # Normalize blood groups.
+
     data["normalized_blood_group"] = (
-        data["blood_group"].apply(normalize_blood_group)
+        data["blood_group"].apply(
+            normalize_blood_group
+        )
     )
+
+    # Get predictions from the existing trained model.
 
     threshold_table = get_ml_threshold_table().copy()
 
@@ -274,28 +307,97 @@ def add_ml_threshold(data):
         )
     )
 
-    # Match hospital and blood group.
-    data = data.merge(
-        threshold_table[
+    # Get hospital-specific thresholds.
+
+    hospital_thresholds = (
+        threshold_table
+        .groupby(
             [
                 "hospital",
-                "normalized_blood_group",
-                "predicted_threshold"
-            ]
-        ],
-        left_on=[
+                "normalized_blood_group"
+            ],
+            as_index=False
+        )["predicted_threshold"]
+        .median()
+    )
+
+    hospital_thresholds.rename(
+        columns={
+            "hospital": "training_hospital",
+            "predicted_threshold": "specific_threshold"
+        },
+        inplace=True
+    )
+
+    # Calculate fallback thresholds separately
+    # for each blood group using existing predictions.
+
+    fallback_thresholds = (
+        hospital_thresholds
+        .groupby("normalized_blood_group")[
+            "specific_threshold"
+        ]
+        .median()
+        .reset_index()
+    )
+
+    fallback_thresholds.rename(
+        columns={
+            "specific_threshold": "fallback_threshold"
+        },
+        inplace=True
+    )
+
+    # Merge hospital-specific thresholds.
+
+    data = data.merge(
+        hospital_thresholds,
+        on=[
             "training_hospital",
-            "normalized_blood_group"
-        ],
-        right_on=[
-            "hospital",
             "normalized_blood_group"
         ],
         how="left"
     )
 
+    # Merge fallback thresholds by blood group.
+
+    data = data.merge(
+        fallback_thresholds,
+        on="normalized_blood_group",
+        how="left"
+    )
+
+    # Prefer hospital-specific predictions.
+    # Otherwise use the blood-group fallback.
+
+    data["predicted_threshold"] = (
+        data["specific_threshold"].combine_first(
+            data["fallback_threshold"]
+        )
+    )
+
+    # Identify the threshold source.
+
+    data["threshold_source"] = "Hospital-specific ML"
+
+    data.loc[
+        data["specific_threshold"].isna()
+        & data["fallback_threshold"].notna(),
+        "threshold_source"
+    ] = "Fallback estimate"
+
+    data.loc[
+        data["predicted_threshold"].isna(),
+        "threshold_source"
+    ] = "Unavailable"
+
+    # Remove temporary columns.
+
     data.drop(
-        columns=["hospital"],
+        columns=[
+            "specific_threshold",
+            "fallback_threshold"
+        ],
         inplace=True,
         errors="ignore"
     )
@@ -310,19 +412,26 @@ def add_ml_threshold(data):
 try:
 
     ML_THRESHOLD_DATA = get_ml_threshold_table()
+
     ML_AVAILABLE = True
+
     ML_ERROR = None
 
 except Exception as error:
 
     ML_THRESHOLD_DATA = pd.DataFrame()
+
     ML_AVAILABLE = False
+
     ML_ERROR = str(error)
+
+
 # =========================================================
 # SESSION STATE
 # =========================================================
 
 if "search_triggered" not in st.session_state:
+
     st.session_state.search_triggered = False
 
 
@@ -332,12 +441,14 @@ if "search_triggered" not in st.session_state:
 
 @st.cache_resource
 def _sent_alerts():
+
     return set()
 
 
 def check_low_stock(force=False):
 
     if not ML_AVAILABLE:
+
         return "model_error"
 
     merged = BLOOD_STOCK.merge(
@@ -348,24 +459,30 @@ def check_low_stock(force=False):
     )
 
     # Ignore unverified stock.
+
     merged = merged[
         merged["verification_status"] != "not_verified"
     ]
 
+    # Add hospital-specific or fallback thresholds.
+
     merged = add_ml_threshold(merged)
 
-    # Consider only records with a predicted threshold.
+    # Consider only records with a threshold.
+
     merged = merged.dropna(
         subset=["predicted_threshold"]
     )
 
-    # Compare stock against the ML threshold.
+    # Compare available stock with the threshold.
+
     low = merged[
         merged["units_available"] <
         merged["predicted_threshold"]
     ].sort_values("units_available")
 
     if low.empty:
+
         return "none"
 
     signature = str(sorted(zip(
@@ -379,6 +496,7 @@ def check_low_stock(force=False):
     sent = _sent_alerts()
 
     if signature in sent and not force:
+
         return "already_sent"
 
     lines = []
@@ -386,6 +504,7 @@ def check_low_stock(force=False):
     for _, row in low.head(15).iterrows():
 
         units = int(row["units_available"])
+
         threshold = int(row["predicted_threshold"])
 
         tag = (
@@ -394,34 +513,45 @@ def check_low_stock(force=False):
             else f"{units} units left"
         )
 
+        threshold_source = html.escape(
+            str(row["threshold_source"])
+        )
+
         lines.append(
             f"• {html.escape(str(row['name']))}: "
             f"<b>{html.escape(str(row['blood_group']))}</b> "
             f"{html.escape(str(row['component']))} - "
             f"{tag} "
-            f"(ML threshold: {threshold} units)"
+            f"({threshold_source}: {threshold} units)"
         )
 
     extra = len(low) - 15
 
     message = (
-        "🩸 <b>HEMOTRACK ML Low Blood Alert</b>\n\n"
+        "🩸 <b>HEMOTRACK Low Blood Stock Alert</b>\n\n"
         + "\n".join(lines)
     )
 
     if extra > 0:
+
         message += f"\n…and {extra} more"
 
-    message += "\n\nPlease arrange donors urgently."
+    message += (
+        "\n\nPlease confirm availability directly "
+        "with the blood bank."
+    )
 
     if send_telegram_alert(message):
+
         sent.add(signature)
+
         return "sent"
 
     return "failed"
 
 
 # Check low stock automatically.
+
 alert_status = check_low_stock()
 
 
@@ -438,16 +568,28 @@ with st.sidebar:
         result = check_low_stock(force=True)
 
         if result == "sent":
-            st.success("Alert sent to Telegram!")
+
+            st.success(
+                "Alert sent to Telegram!"
+            )
 
         elif result == "none":
-            st.info("No ML low-stock items right now.")
+
+            st.info(
+                "No ML low-stock items right now."
+            )
 
         elif result == "model_error":
-            st.error("ML model is unavailable.")
+
+            st.error(
+                "ML model is unavailable."
+            )
 
         else:
-            st.error("Could not send. Check Telegram secrets.")
+
+            st.error(
+                "Could not send. Check Telegram secrets."
+            )
 
 
 # =========================================================
@@ -572,6 +714,7 @@ h1, h2, h3 {
 }
 
 @media (max-width: 768px) {
+
     .header-section h1 {
         font-size: 2rem;
     }
@@ -579,6 +722,7 @@ h1, h2, h3 {
     .header-stats {
         flex-direction: column;
     }
+
 }
 
 </style>
@@ -589,13 +733,15 @@ h1, h2, h3 {
 # HEADER SECTION
 # =========================================================
 
-# HEMOTRACK HEADER
 st.html("""
 <div class="header-section">
+
     <h1>🩸 HEMOTRACK</h1>
+
     <p>Real-Time Blood Availability in Kerala</p>
 
     <div class="header-stats">
+
         <div class="stat-box">
             <div class="stat-box-num">15</div>
             <div class="stat-box-label">Blood Banks (Ernakulam)</div>
@@ -610,7 +756,9 @@ st.html("""
             <div class="stat-box-num">4</div>
             <div class="stat-box-label">Components</div>
         </div>
+
     </div>
+
 </div>
 """)
 
@@ -626,7 +774,10 @@ st.markdown(
 
 st.markdown("## 🔍 Search Blood Availability")
 
-col1, col2, col3, col4 = st.columns(4, gap="medium")
+col1, col2, col3, col4 = st.columns(
+    4,
+    gap="medium"
+)
 
 with col1:
 
@@ -677,6 +828,7 @@ with col_search1:
         use_container_width=True,
         type="primary"
     ):
+
         st.session_state.search_triggered = True
 
 with col_search2:
@@ -685,7 +837,9 @@ with col_search2:
         "🔄 Reset",
         use_container_width=True
     ):
+
         st.session_state.search_triggered = False
+
         st.rerun()
 
 
@@ -707,7 +861,9 @@ if st.session_state.search_triggered:
         or component == "Select Component..."
     ):
 
-        st.error("❌ Please complete all selections to search")
+        st.error(
+            "❌ Please complete all selections to search"
+        )
 
         st.info(
             "💡 Select District, Blood Group, and Blood Component"
@@ -716,6 +872,7 @@ if st.session_state.search_triggered:
     else:
 
         # Merge hospital and stock data.
+
         merged_data = BLOOD_STOCK.merge(
             BLOOD_BANKS,
             left_on="hospital_id",
@@ -723,14 +880,22 @@ if st.session_state.search_triggered:
             how="inner"
         )
 
-        # Add XGBoost threshold predictions.
+        # Add ML and fallback thresholds.
+
         if ML_AVAILABLE:
-            merged_data = add_ml_threshold(merged_data)
+
+            merged_data = add_ml_threshold(
+                merged_data
+            )
 
         else:
+
             merged_data["predicted_threshold"] = pd.NA
 
+            merged_data["threshold_source"] = "Unavailable"
+
         # Apply selected filters.
+
         filtered_stock = merged_data[
             (merged_data["district"] == district)
             & (merged_data["blood_group"] == blood_group)
@@ -742,11 +907,14 @@ if st.session_state.search_triggered:
             col1, col2 = st.columns([1, 1])
 
             with col1:
+
                 st.warning(
-                    f"❌ No {blood_group} {component} available in {district}"
+                    f"❌ No {blood_group} {component} "
+                    f"available in {district}"
                 )
 
             with col2:
+
                 st.info(
                     "💡 Try a different district or blood component"
                 )
@@ -757,7 +925,9 @@ if st.session_state.search_triggered:
             # STATISTICS
             # =================================================
 
-            hospital_ids = filtered_stock["hospital_id"].unique()
+            hospital_ids = filtered_stock[
+                "hospital_id"
+            ].unique()
 
             available_count = len(
                 filtered_stock[
@@ -794,7 +964,9 @@ if st.session_state.search_triggered:
 
             with stat_col3:
 
-                total_units = filtered_stock["units_available"].sum()
+                total_units = filtered_stock[
+                    "units_available"
+                ].sum()
 
                 st.markdown(
                     f'<div class="stat-card">'
@@ -820,16 +992,27 @@ if st.session_state.search_triggered:
 
                 hospital_id = stock_row["hospital_id"]
 
-                units = int(stock_row["units_available"])
+                units = int(
+                    stock_row["units_available"]
+                )
 
                 max_units = 30
 
                 hospital_name = stock_row["name"]
+
                 hospital_addr = stock_row["address"]
+
                 phone = stock_row["phone"]
+
                 maps_link = stock_row["google_maps_link"]
 
-                ml_threshold = stock_row["predicted_threshold"]
+                ml_threshold = stock_row[
+                    "predicted_threshold"
+                ]
+
+                threshold_source = stock_row[
+                    "threshold_source"
+                ]
 
 
                 # ---------------------------------------------
@@ -839,18 +1022,40 @@ if st.session_state.search_triggered:
                 if stock_row["verification_status"] == "not_verified":
 
                     status_text = "🔲 Not Verified"
+
                     units_display = "—"
+
                     progress_pct = 0
 
                 elif units == 0:
 
                     status_text = "❌ Out of Stock"
+
                     units_display = "0 units"
+
                     progress_pct = 0
 
                 elif pd.isna(ml_threshold):
 
-                    status_text = "⚪ ML Threshold Unavailable"
+                    status_text = "⚪ Threshold Unavailable"
+
+                    units_display = f"{units} units"
+
+                    progress_pct = min(
+                        (units / max_units) * 100,
+                        100
+                    )
+
+                elif threshold_source == "Fallback estimate":
+
+                    if units < ml_threshold:
+
+                        status_text = "⚠️ Low Stock (Fallback)"
+
+                    else:
+
+                        status_text = "🔵 Fallback Estimate"
+
                     units_display = f"{units} units"
 
                     progress_pct = min(
@@ -861,6 +1066,7 @@ if st.session_state.search_triggered:
                 elif units < ml_threshold:
 
                     status_text = "⚠️ Low Stock"
+
                     units_display = f"{units} units"
 
                     progress_pct = min(
@@ -871,6 +1077,7 @@ if st.session_state.search_triggered:
                 else:
 
                     status_text = "✅ Available"
+
                     units_display = f"{units} units"
 
                     progress_pct = min(
@@ -889,13 +1096,19 @@ if st.session_state.search_triggered:
 
                     with col_name:
 
-                        st.markdown(f"### {hospital_name}")
+                        st.markdown(
+                            f"### {hospital_name}"
+                        )
 
-                        st.markdown(f"📍 {hospital_addr}")
+                        st.markdown(
+                            f"📍 {hospital_addr}"
+                        )
 
                     with col_status:
 
-                        st.markdown(f"#### {status_text}")
+                        st.markdown(
+                            f"#### {status_text}"
+                        )
 
                     st.divider()
 
@@ -928,10 +1141,24 @@ if st.session_state.search_triggered:
 
                         elif pd.notna(ml_threshold):
 
-                            st.metric(
-                                "ML Predicted Threshold",
-                                f"{int(ml_threshold)} units"
-                            )
+                            if threshold_source == "Fallback estimate":
+
+                                st.metric(
+                                    "Fallback Threshold Estimate",
+                                    f"{int(ml_threshold)} units"
+                                )
+
+                                st.caption(
+                                    "Estimated using existing model "
+                                    "predictions for the same blood group."
+                                )
+
+                            else:
+
+                                st.metric(
+                                    "ML Predicted Threshold",
+                                    f"{int(ml_threshold)} units"
+                                )
 
                         else:
 
@@ -996,16 +1223,22 @@ if st.session_state.search_triggered:
                         ):
 
                             verification = (
-                                str(stock_row["verification_status"])
+                                str(
+                                    stock_row["verification_status"]
+                                )
                                 .replace("_", " ")
                                 .title()
                             )
 
                             if pd.notna(ml_threshold):
+
                                 threshold_display = (
-                                    f"{int(ml_threshold)} units"
+                                    f"{int(ml_threshold)} units "
+                                    f"({threshold_source})"
                                 )
+
                             else:
+
                                 threshold_display = "Unavailable"
 
                             st.info(
@@ -1022,7 +1255,7 @@ if st.session_state.search_triggered:
 
                                 **Data Source:** {stock_row['source']}
 
-                                **ML Predicted Threshold:** {threshold_display}
+                                **Threshold:** {threshold_display}
                                 """
                             )
 
@@ -1033,7 +1266,6 @@ if st.session_state.search_triggered:
 # FOOTER SECTION
 # =========================================================
 
-# HEMOTRACK FOOTER
 st.html("""
 <div class="footer-section">
 
@@ -1046,6 +1278,7 @@ st.html("""
     <p><strong>⚠️ Important Disclaimer:</strong></p>
 
     <p style="font-size: 0.9rem; margin: 10px 0;">
+
         This is a <strong>DEMO application</strong> for testing and
         demonstration purposes only.
 
@@ -1054,6 +1287,7 @@ st.html("""
         by calling them before visiting.
 
         Stock levels may change throughout the day.
+
     </p>
 
     <p style="margin-top: 20px;
@@ -1068,10 +1302,12 @@ st.html("""
             © 2026 HEMOTRACK.
             In partnership with Government of India - Blood Bank Directory
         </small>
+
     </p>
 
 </div>
 """)
+
 
 # =========================================================
 # TELEGRAM TEST ALERT
@@ -1079,10 +1315,16 @@ st.html("""
 
 if st.button("Send test alert"):
 
-    if send_telegram_alert("🩸 Test alert from HemoTrack"):
+    if send_telegram_alert(
+        "🩸 Test alert from HEMOTRACK"
+    ):
 
-        st.success("Test alert sent successfully!")
+        st.success(
+            "Test alert sent successfully!"
+        )
 
     else:
 
-        st.error("Failed to send test alert. Check Telegram secrets.")
+        st.error(
+            "Failed to send test alert. Check Telegram secrets."
+        )
