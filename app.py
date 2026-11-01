@@ -319,7 +319,7 @@ except Exception as error:
     ML_AVAILABLE = False
     ML_ERROR = str(error)
     if not ML_AVAILABLE:
-    st.error(f"ML MODEL ERROR: {ML_ERROR}")
+       st.error(f"ML MODEL ERROR: {ML_ERROR}")
 
 
 # =========================================================
