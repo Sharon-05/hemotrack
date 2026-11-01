@@ -35,6 +35,7 @@ TRAINING_FILE = BASE_DIR / "threshold_training_targets.csv"
 def send_telegram_alert(message):
 
     try:
+
         url = (
             f"https://api.telegram.org/bot"
             f"{st.secrets['TELEGRAM_BOT_TOKEN']}/sendMessage"
@@ -133,13 +134,13 @@ HOSPITAL_MAPPING = {
 
 
 def normalize_blood_group(value):
-    """Convert Unicode minus signs to normal minus signs."""
+    """Normalize blood group names."""
 
     return str(value).strip().replace("−", "-")
 
 
 def get_training_hospital(app_hospital):
-    """Find the corresponding hospital in the training dataset."""
+    """Map application hospital names to training names."""
 
     return HOSPITAL_MAPPING.get(
         str(app_hospital).strip()
@@ -223,7 +224,7 @@ def load_threshold_data():
 
 
 # =========================================================
-# GENERATE ML-PREDICTED THRESHOLDS
+# GENERATE EXISTING ML-PREDICTED THRESHOLDS
 # =========================================================
 
 @st.cache_data
@@ -235,13 +236,13 @@ def get_ml_threshold_table():
 
     X = training_df[FEATURE_COLUMNS].copy()
 
-    # Create the eight blood-group one-hot columns.
+    # Create blood group one-hot columns.
 
     for column in BLOOD_GROUP_FEATURES:
 
         X[column] = 0
 
-    # Assign 1 to the matching blood group.
+    # Set the corresponding blood group feature to 1.
 
     for index, row in training_df.iterrows():
 
@@ -255,11 +256,11 @@ def get_ml_threshold_table():
 
             X.loc[index, feature_name] = 1
 
-    # Arrange all 18 features in the model's expected order.
+    # Arrange the 18 features in the correct order.
 
     X = X[MODEL_FEATURES]
 
-    # Predict thresholds using the existing model.
+    # Predict thresholds.
 
     predictions = model.predict(X)
 
@@ -276,27 +277,37 @@ def get_ml_threshold_table():
 
 
 # =========================================================
-# ADD ML AND FALLBACK THRESHOLDS TO HOSPITAL STOCK DATA
-# =========================================================
-
-# ADD ML THRESHOLDS FOR ALL HOSPITALS
+# GENERATE ML THRESHOLDS FOR ALL HOSPITALS
 # =========================================================
 
 def add_ml_threshold(data):
 
     data = data.copy()
 
-    # Map application hospital names to training names.
+    # -----------------------------------------------------
+    # 1. MAP HOSPITAL NAMES
+    # -----------------------------------------------------
+
     data["training_hospital"] = data["name"].apply(
         get_training_hospital
     )
 
     # Normalize blood groups.
+
     data["normalized_blood_group"] = (
-        data["blood_group"].apply(normalize_blood_group)
+        data["blood_group"].apply(
+            normalize_blood_group
+        )
     )
 
-    # Get existing model predictions and feature data.
+    # -----------------------------------------------------
+    # 2. LOAD MODEL AND TRAINING DATA
+    # -----------------------------------------------------
+
+    model = load_xgboost_model()
+
+    training_data = load_threshold_data().copy()
+
     threshold_table = get_ml_threshold_table().copy()
 
     threshold_table["normalized_blood_group"] = (
@@ -305,37 +316,54 @@ def add_ml_threshold(data):
         )
     )
 
-    # Get the trained model and historical feature data.
-    model = load_xgboost_model()
-    training_data = load_threshold_data().copy()
+    # -----------------------------------------------------
+    # 3. GET EXISTING HOSPITAL-SPECIFIC PREDICTIONS
+    # -----------------------------------------------------
 
-    # Keep only the model's required input features.
-    feature_columns = NUMERIC_FEATURES + BLOOD_GROUP_FEATURES
-
-    # Generate hospital-specific thresholds from existing predictions.
     hospital_thresholds = (
         threshold_table
         .groupby(
-            ["hospital", "normalized_blood_group"],
+            [
+                "hospital",
+                "normalized_blood_group"
+            ],
             as_index=False
         )["predicted_threshold"]
         .median()
-        .rename(columns={
-            "hospital": "training_hospital",
-            "predicted_threshold": "specific_threshold"
-        })
     )
 
-    # Build feature profiles for every blood group.
-    # These profiles use median historical feature values.
+    hospital_thresholds.rename(
+        columns={
+            "hospital": "training_hospital",
+            "predicted_threshold": "specific_threshold"
+        },
+        inplace=True
+    )
+
+    # -----------------------------------------------------
+    # 4. CREATE HISTORICAL FEATURE PROFILES
+    # -----------------------------------------------------
+
+    # Use median historical numerical features
+    # separately for each blood group.
+
     feature_profiles = (
         training_data
-        .groupby("blood_group")[NUMERIC_FEATURES]
+        .groupby("blood_group")[FEATURE_COLUMNS]
         .median()
         .reset_index()
     )
 
-    # Create one prediction for every hospital and blood group.
+    feature_profiles["blood_group"] = (
+        feature_profiles["blood_group"].apply(
+            normalize_blood_group
+        )
+    )
+
+    # -----------------------------------------------------
+    # 5. CREATE ALL HOSPITAL AND BLOOD GROUP COMBINATIONS
+    # -----------------------------------------------------
+
     hospitals = data[
         ["name", "training_hospital"]
     ].drop_duplicates()
@@ -349,7 +377,8 @@ def add_ml_threshold(data):
         how="cross"
     )
 
-    # Match each blood group to its historical feature profile.
+    # Attach the appropriate historical feature profile.
+
     prediction_rows = prediction_rows.merge(
         feature_profiles,
         left_on="normalized_blood_group",
@@ -357,40 +386,69 @@ def add_ml_threshold(data):
         how="left"
     )
 
-    # Create one-hot blood group features.
+    # -----------------------------------------------------
+    # 6. CREATE BLOOD GROUP ONE-HOT FEATURES
+    # -----------------------------------------------------
+
     for column in BLOOD_GROUP_FEATURES:
+
         prediction_rows[column] = 0
 
     for index, row in prediction_rows.iterrows():
 
         blood_group = row["normalized_blood_group"]
 
-        feature_name = "blood_group_" + blood_group
+        feature_name = f"blood_group_{blood_group}"
 
         if feature_name in BLOOD_GROUP_FEATURES:
+
             prediction_rows.loc[index, feature_name] = 1
 
-    # Prepare model input.
-    X_new = prediction_rows[feature_columns].copy()
+    # -----------------------------------------------------
+    # 7. PREPARE MODEL INPUT
+    # -----------------------------------------------------
 
-    # Handle missing feature values using available medians.
-    X_new = X_new.fillna(
-        training_data[NUMERIC_FEATURES].median()
+    # Use exactly the same 18 features as model training.
+
+    X_new = prediction_rows[MODEL_FEATURES].copy()
+
+    # Fill missing numerical features using training medians.
+
+    feature_medians = training_data[
+        FEATURE_COLUMNS
+    ].median()
+
+    X_new[FEATURE_COLUMNS] = (
+        X_new[FEATURE_COLUMNS].fillna(
+            feature_medians
+        )
     )
 
-    # Predict thresholds using the existing trained model.
-    prediction_rows["generated_threshold"] = model.predict(
-        X_new
-    )
+    X_new = X_new.fillna(0)
 
-    # Thresholds must be non-negative whole numbers.
-    prediction_rows["generated_threshold"] = (
-        prediction_rows["generated_threshold"]
-        .clip(lower=0)
-        .apply(lambda value: int(round(value)))
-    )
+    # -----------------------------------------------------
+    # 8. GENERATE NEW XGBOOST PREDICTIONS
+    # -----------------------------------------------------
 
-    # Merge hospital-specific predictions first.
+    generated_predictions = model.predict(X_new)
+
+    prediction_rows["generated_threshold"] = [
+        max(0, int(math.ceil(float(value))))
+        for value in generated_predictions
+    ]
+
+    generated_thresholds = prediction_rows[
+        [
+            "name",
+            "normalized_blood_group",
+            "generated_threshold"
+        ]
+    ].copy()
+
+    # -----------------------------------------------------
+    # 9. MERGE EXISTING HOSPITAL-SPECIFIC PREDICTIONS
+    # -----------------------------------------------------
+
     data = data.merge(
         hospital_thresholds,
         on=[
@@ -400,31 +458,41 @@ def add_ml_threshold(data):
         how="left"
     )
 
-    # Merge newly generated model predictions.
-    generated_thresholds = prediction_rows[
-        [
-            "name",
-            "normalized_blood_group",
-            "generated_threshold"
-        ]
-    ]
+    # -----------------------------------------------------
+    # 10. MERGE NEWLY GENERATED PREDICTIONS
+    # -----------------------------------------------------
 
     data = data.merge(
         generated_thresholds,
-        on=["name", "normalized_blood_group"],
+        on=[
+            "name",
+            "normalized_blood_group"
+        ],
         how="left"
     )
 
-    # Prefer the existing hospital-specific prediction.
+    # -----------------------------------------------------
+    # 11. SELECT FINAL THRESHOLD
+    # -----------------------------------------------------
+
+    # Use the existing hospital-specific prediction
+    # wherever available.
+    #
     # Otherwise use the newly generated XGBoost prediction.
+
     data["predicted_threshold"] = (
         data["specific_threshold"].combine_first(
             data["generated_threshold"]
         )
     )
 
-    # Identify the prediction source.
-    data["threshold_source"] = "Hospital-specific ML"
+    # -----------------------------------------------------
+    # 12. IDENTIFY THRESHOLD SOURCE
+    # -----------------------------------------------------
+
+    data["threshold_source"] = (
+        "Hospital-specific ML"
+    )
 
     data.loc[
         data["specific_threshold"].isna()
@@ -437,7 +505,10 @@ def add_ml_threshold(data):
         "threshold_source"
     ] = "Unavailable"
 
-    # Remove temporary columns.
+    # -----------------------------------------------------
+    # 13. REMOVE TEMPORARY COLUMNS
+    # -----------------------------------------------------
+
     data.drop(
         columns=[
             "specific_threshold",
@@ -448,7 +519,6 @@ def add_ml_threshold(data):
     )
 
     return data
-
 
 
 # =========================================================
@@ -504,23 +574,23 @@ def check_low_stock(force=False):
         how="inner"
     )
 
-    # Ignore unverified stock.
+    # Ignore unverified stock records.
 
     merged = merged[
         merged["verification_status"] != "not_verified"
-    ]
+    ].copy()
 
-    # Add hospital-specific or fallback thresholds.
+    # Add ML thresholds for all hospitals.
 
     merged = add_ml_threshold(merged)
 
-    # Consider only records with a threshold.
+    # Keep records with available predictions.
 
     merged = merged.dropna(
         subset=["predicted_threshold"]
     )
 
-    # Compare available stock with the threshold.
+    # Compare stock against predicted thresholds.
 
     low = merged[
         merged["units_available"] <
@@ -629,6 +699,12 @@ with st.sidebar:
 
             st.error(
                 "ML model is unavailable."
+            )
+
+        elif result == "already_sent":
+
+            st.info(
+                "The current low-stock alert was already sent."
             )
 
         else:
@@ -926,13 +1002,25 @@ if st.session_state.search_triggered:
             how="inner"
         )
 
-        # Add ML and fallback thresholds.
+        # Generate ML thresholds for all hospitals.
 
         if ML_AVAILABLE:
 
-            merged_data = add_ml_threshold(
-                merged_data
-            )
+            try:
+
+                merged_data = add_ml_threshold(
+                    merged_data
+                )
+
+            except Exception as error:
+
+                st.error(
+                    f"Could not generate ML thresholds: {error}"
+                )
+
+                merged_data["predicted_threshold"] = pd.NA
+
+                merged_data["threshold_source"] = "Unavailable"
 
         else:
 
@@ -944,7 +1032,11 @@ if st.session_state.search_triggered:
 
         filtered_stock = merged_data[
             (merged_data["district"] == district)
-            & (merged_data["blood_group"] == blood_group)
+            & (
+                merged_data["blood_group"].apply(
+                    normalize_blood_group
+                ) == normalize_blood_group(blood_group)
+            )
             & (merged_data["component"] == component)
         ].copy()
 
@@ -1024,7 +1116,6 @@ if st.session_state.search_triggered:
 
             st.markdown("---")
 
-
             # =================================================
             # HOSPITAL CARDS
             # =================================================
@@ -1060,7 +1151,6 @@ if st.session_state.search_triggered:
                     "threshold_source"
                 ]
 
-
                 # ---------------------------------------------
                 # DETERMINE STOCK STATUS
                 # ---------------------------------------------
@@ -1092,15 +1182,15 @@ if st.session_state.search_triggered:
                         100
                     )
 
-                elif threshold_source == "Fallback estimate":
+                elif threshold_source == "XGBoost generated estimate":
 
                     if units < ml_threshold:
 
-                        status_text = "⚠️ Low Stock (Fallback)"
+                        status_text = "⚠️ Low Stock (XGBoost Estimate)"
 
                     else:
 
-                        status_text = "🔵 Fallback Estimate"
+                        status_text = "🔵 XGBoost Estimate"
 
                     units_display = f"{units} units"
 
@@ -1131,7 +1221,6 @@ if st.session_state.search_triggered:
                         100
                     )
 
-
                 # ---------------------------------------------
                 # HOSPITAL CARD
                 # ---------------------------------------------
@@ -1157,7 +1246,6 @@ if st.session_state.search_triggered:
                         )
 
                     st.divider()
-
 
                     # -----------------------------------------
                     # HOSPITAL INFORMATION
@@ -1187,16 +1275,17 @@ if st.session_state.search_triggered:
 
                         elif pd.notna(ml_threshold):
 
-                            if threshold_source == "Fallback estimate":
+                            if threshold_source == "XGBoost generated estimate":
 
                                 st.metric(
-                                    "Fallback Threshold Estimate",
+                                    "XGBoost Estimated Threshold",
                                     f"{int(ml_threshold)} units"
                                 )
 
                                 st.caption(
-                                    "Estimated using existing model "
-                                    "predictions for the same blood group."
+                                    "Generated by the existing XGBoost "
+                                    "model using historical blood-group "
+                                    "feature profiles."
                                 )
 
                             else:
@@ -1213,7 +1302,6 @@ if st.session_state.search_triggered:
                                 "Unavailable"
                             )
 
-
                     with grid_col2:
 
                         st.metric(
@@ -1226,9 +1314,7 @@ if st.session_state.search_triggered:
                             stock_row["component"]
                         )
 
-
                     st.divider()
-
 
                     # -----------------------------------------
                     # ACTION BUTTONS
@@ -1250,7 +1336,6 @@ if st.session_state.search_triggered:
                             use_container_width=True
                         )
 
-
                     with btn_col2:
 
                         st.link_button(
@@ -1258,7 +1343,6 @@ if st.session_state.search_triggered:
                             maps_link,
                             use_container_width=True
                         )
-
 
                     with btn_col3:
 
