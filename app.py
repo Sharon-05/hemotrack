@@ -860,7 +860,7 @@ st.html("""
 
     <h1>🩸 HEMOTRACK</h1>
 
-    <p>Real-Time Blood Availability in Kerala</p>
+    <p>Blood Availability Finder With ML Based Shortage Alerts</p>
 
     <div class="header-stats">
 
