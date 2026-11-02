@@ -12,7 +12,7 @@ from xgboost import XGBRegressor
 # =========================================================
 
 st.set_page_config(
-    page_title="HEMOTRACK - Real-Time Blood Availability in Kerala",
+    page_title="HEMOTRACK - Blood Availability finder with Ml based shortage Alerts",
     page_icon="🩸",
     layout="wide",
     initial_sidebar_state="expanded"
