@@ -1,19 +1,41 @@
+
 import pandas as pd
+import random
 from datetime import datetime, timedelta
 from pathlib import Path
 
-# Blood groups and components
-BLOOD_GROUPS = ["All Blood Groups", "A+", "A−", "B+", "B−", "AB+", "AB−", "O+", "O−"]
-BLOOD_COMPONENTS = ["All Components", "Packed Red Blood Cells", "Whole Blood", "Platelets", "Plasma"]
+# =========================================================
+# BLOOD GROUPS AND COMPONENTS
+# =========================================================
+
+BLOOD_GROUPS = [
+    "All Blood Groups", "A+", "A−", "B+", "B−",
+    "AB+", "AB−", "O+", "O−"
+]
+
+BLOOD_COMPONENTS = [
+    "All Components",
+    "Packed Red Blood Cells",
+    "Whole Blood",
+    "Platelets",
+    "Plasma"
+]
+
 KERALA_DISTRICTS = [
-    "Thiruvananthapuram", "Kollam", "Pathanamthitta", "Alappuzha", "Kottayam",
-    "Idukki", "Ernakulam", "Thrissur", "Malappuram", "Kozhikode",
+    "Thiruvananthapuram", "Kollam", "Pathanamthitta",
+    "Alappuzha", "Kottayam", "Idukki", "Ernakulam",
+    "Thrissur", "Malappuram", "Kozhikode",
     "Wayanad", "Kannur", "Kasaragod"
 ]
 
-# Comprehensive hospital database for Kerala
+# =========================================================
+# HOSPITAL DATABASE
+# =========================================================
+
 BLOOD_BANKS = pd.DataFrame([
-    # ==================== ERNAKULAM DISTRICT (15 hospitals) ====================
+
+    # ================= ERNAKULAM DISTRICT =================
+
     {
         "id": "BB_EKM_001",
         "name": "Ernakulam General Hospital Blood Bank",
@@ -149,8 +171,9 @@ BLOOD_BANKS = pd.DataFrame([
         "coordinates": "9.9675,76.2965",
         "google_maps_link": "https://www.google.com/maps/search/Government+Hospital+Ernakulathappan+Lane/@9.9675,76.2965,15z"
     },
-    
-    # ==================== OTHER DISTRICTS (Sample) ====================
+
+    # ================= OTHER DISTRICTS =================
+
     {
         "id": "BB001",
         "name": "Trivandrum Medical College Blood Bank",
@@ -204,90 +227,115 @@ BLOOD_BANKS = pd.DataFrame([
         "phone": "+91-477-2266900",
         "coordinates": "9.4862,76.3272",
         "google_maps_link": "https://www.google.com/maps/search/Alappuzha+District+Hospital/@9.4862,76.3272,15z"
-    },
+    }
 ])
 
-# Sample blood stock (demo data - not real)
+# =========================================================
+# DATES
+# =========================================================
+
 today = datetime.now().strftime("%Y-%m-%d")
 tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
 next_week = (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
 
-# Helper function to generate realistic stock data
+# =========================================================
+# RANDOM SIMULATED STOCK GENERATOR
+# =========================================================
+
 def generate_stock(hospital_id, blood_groups_list):
-    """Generate stock data for a hospital across multiple blood groups and components"""
+    """
+    Generate simulated stock for every blood group
+    and component of a hospital.
+
+    These values are demonstration data, not live stock.
+    """
+
     stock_records = []
-    components_list = ["Packed Red Blood Cells", "Whole Blood", "Platelets", "Plasma"]
-    
+
+    components_list = [
+        "Packed Red Blood Cells",
+        "Whole Blood",
+        "Platelets",
+        "Plasma"
+    ]
+
     for bg in blood_groups_list:
+
         for component in components_list:
-            # Randomly assign stock status
-            import random
+
             rand = random.random()
-            if rand < 0.1:  # 10% chance: not verified
+
+            if rand < 0.10:
+                # 10% chance of zero stock
                 units = 0
-                status = "not_verified"
-            elif rand < 0.2:  # 10% chance: out of stock
-                units = 0
-                status = "verified"
-            elif rand < 0.3:  # 10% chance: low stock
-                units = random.randint(1, 4)
-                status = "verified"
-            else:  # 70% chance: available
+
+            elif rand < 0.30:
+                # 20% chance of low stock
+                units = random.randint(1, 5)
+
+            else:
+                # 70% chance of sufficient stock
                 units = random.randint(8, 25)
-                status = "verified"
-            
+
             stock_records.append({
                 "hospital_id": hospital_id,
                 "blood_group": bg,
                 "component": component,
                 "units_available": units,
-                "expiry_date": next_week if units > 0 else "2026-10-19",
+                "expiry_date": next_week if units > 0 else tomorrow,
                 "update_time": today,
-                "source": "eRaktKosh",
-                "verification_status": status
+                "source": "Simulated Demo Data",
+                "verification_status": "simulated"
             })
-    
+
     return stock_records
+
+
+# =========================================================
+# GENERATE STOCK FOR ALL ERNAKULAM HOSPITALS
+# =========================================================
 
 BLOOD_STOCK_LIST = []
 
-# Generate stock for all Ernakulam hospitals
 ernakulam_hospitals = [
-    "BB_EKM_001", "BB_EKM_002", "BB_EKM_003", "BB_EKM_004", "BB_EKM_005",
-    "BB_EKM_006", "BB_EKM_007", "BB_EKM_008", "BB_EKM_009", "BB_EKM_010",
-    "BB_EKM_011", "BB_EKM_012", "BB_EKM_013", "BB_EKM_014", "BB_EKM_015"
+    "BB_EKM_001", "BB_EKM_002", "BB_EKM_003",
+    "BB_EKM_004", "BB_EKM_005", "BB_EKM_006",
+    "BB_EKM_007", "BB_EKM_008", "BB_EKM_009",
+    "BB_EKM_010", "BB_EKM_011", "BB_EKM_012",
+    "BB_EKM_013", "BB_EKM_014", "BB_EKM_015"
 ]
 
-blood_groups_all = ["O+", "O−", "A+", "A−", "B+", "B−", "AB+", "AB−"]
+blood_groups_all = [
+    "O+", "O−", "A+", "A−",
+    "B+", "B−", "AB+", "AB−"
+]
 
 for hospital in ernakulam_hospitals:
-    BLOOD_STOCK_LIST.extend(generate_stock(hospital, blood_groups_all))
 
-# Add sample data for other districts
-BLOOD_STOCK_LIST.extend([
-    # Trivandrum
-    {"hospital_id": "BB001", "blood_group": "O+", "component": "Packed Red Blood Cells", "units_available": 12, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    {"hospital_id": "BB001", "blood_group": "A+", "component": "Plasma", "units_available": 8, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    {"hospital_id": "BB001", "blood_group": "B+", "component": "Whole Blood", "units_available": 3, "expiry_date": tomorrow, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    
-    # Kottayam
-    {"hospital_id": "BB002", "blood_group": "O+", "component": "Packed Red Blood Cells", "units_available": 18, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    {"hospital_id": "BB002", "blood_group": "A+", "component": "Platelets", "units_available": 6, "expiry_date": tomorrow, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    
-    # Thrissur
-    {"hospital_id": "BB004", "blood_group": "A+", "component": "Packed Red Blood Cells", "units_available": 14, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    {"hospital_id": "BB004", "blood_group": "O+", "component": "Platelets", "units_available": 9, "expiry_date": tomorrow, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    
-    # Kozhikode
-    {"hospital_id": "BB005", "blood_group": "O+", "component": "Packed Red Blood Cells", "units_available": 16, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    {"hospital_id": "BB005", "blood_group": "B+", "component": "Whole Blood", "units_available": 11, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    
-    # Kannur
-    {"hospital_id": "BB006", "blood_group": "A+", "component": "Platelets", "units_available": 4, "expiry_date": tomorrow, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-    
-    # Alappuzha
-    {"hospital_id": "BB008", "blood_group": "O+", "component": "Packed Red Blood Cells", "units_available": 13, "expiry_date": next_week, "update_time": today, "source": "eRaktKosh", "verification_status": "verified"},
-])
+    BLOOD_STOCK_LIST.extend(
+        generate_stock(hospital, blood_groups_all)
+    )
+
+
+# =========================================================
+# GENERATE STOCK FOR OTHER DISTRICTS
+# =========================================================
+
+other_district_hospitals = [
+    "BB001",
+    "BB002",
+    "BB004",
+    "BB005",
+    "BB006",
+    "BB008"
+]
+
+for hospital in other_district_hospitals:
+
+    BLOOD_STOCK_LIST.extend(
+        generate_stock(hospital, blood_groups_all)
+    )
+
 
 # =========================================================
 # PERSISTENT DEMO STOCK
@@ -297,13 +345,71 @@ DEMO_STOCK_FILE = Path(__file__).parent / "demo_stock.csv"
 
 if DEMO_STOCK_FILE.exists():
 
-    # Read the previously saved stock values.
+    # Reuse previously saved stock values.
     BLOOD_STOCK = pd.read_csv(DEMO_STOCK_FILE)
+
+    # Ensure required columns exist.
+    required_columns = [
+        "hospital_id",
+        "blood_group",
+        "component",
+        "units_available",
+        "expiry_date",
+        "update_time",
+        "source",
+        "verification_status"
+    ]
+
+    for column in required_columns:
+
+        if column not in BLOOD_STOCK.columns:
+            BLOOD_STOCK[column] = None
+
+    # Convert old unverified entries into simulated stock.
+    old_unverified = (
+        BLOOD_STOCK["verification_status"]
+        .astype(str)
+        .str.lower()
+        .eq("not_verified")
+    )
+
+    for index in BLOOD_STOCK[old_unverified].index:
+
+        BLOOD_STOCK.loc[index, "units_available"] = random.randint(1, 20)
+
+        BLOOD_STOCK.loc[index, "expiry_date"] = next_week
+
+    # All stock in this demonstration dataset is simulated.
+    BLOOD_STOCK["verification_status"] = "simulated"
+    BLOOD_STOCK["source"] = "Simulated Demo Data"
+
+    # Update the date.
+    BLOOD_STOCK["update_time"] = today
 
 else:
 
-    # Generate demo stock only once.
+    # Create stock for all hospitals for the first time.
     BLOOD_STOCK = pd.DataFrame(BLOOD_STOCK_LIST)
 
-    # Save it so future runs use the same values.
-    BLOOD_STOCK.to_csv(DEMO_STOCK_FILE, index=False)
+
+# =========================================================
+# SAVE STOCK
+# =========================================================
+
+BLOOD_STOCK.to_csv(DEMO_STOCK_FILE, index=False)
+
+# Make sure stock quantities are numeric.
+BLOOD_STOCK["units_available"] = pd.to_numeric(
+    BLOOD_STOCK["units_available"],
+    errors="coerce"
+).fillna(0).astype(int)
+
+# Normalize blood group symbols.
+BLOOD_STOCK["blood_group"] = (
+    BLOOD_STOCK["blood_group"]
+    .astype(str)
+    .str.replace("−", "-", regex=False)
+)
+
+# Export the final stock DataFrame for app.py.
+BLOOD_STOCK = BLOOD_STOCK.reset_index(drop=True)
