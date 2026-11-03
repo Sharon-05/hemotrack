@@ -1,492 +1,492 @@
 hospital_id,blood_group,component,units_available,expiry_date,update_time,source,verification_status
-BB_EKM_001,O+,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,O+,Whole Blood,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,O+,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,O+,Plasma,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,O−,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,O−,Whole Blood,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,O−,Platelets,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,O−,Plasma,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A+,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A+,Whole Blood,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A+,Platelets,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A+,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A−,Packed Red Blood Cells,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A−,Whole Blood,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A−,Platelets,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,A−,Plasma,3,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B+,Packed Red Blood Cells,19,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B+,Whole Blood,18,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B+,Platelets,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B+,Plasma,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B−,Packed Red Blood Cells,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B−,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B−,Platelets,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,B−,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB+,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB+,Whole Blood,8,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB+,Platelets,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB+,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB−,Packed Red Blood Cells,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB−,Whole Blood,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB−,Platelets,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_001,AB−,Plasma,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O+,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O+,Whole Blood,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O+,Platelets,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O+,Plasma,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O−,Packed Red Blood Cells,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O−,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O−,Platelets,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,O−,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A+,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A+,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A+,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A+,Plasma,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A−,Packed Red Blood Cells,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A−,Whole Blood,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A−,Platelets,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,A−,Plasma,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B+,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B+,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B+,Platelets,6,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B+,Plasma,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B−,Packed Red Blood Cells,19,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B−,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B−,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,B−,Plasma,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB+,Packed Red Blood Cells,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB+,Whole Blood,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB+,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB+,Plasma,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB−,Whole Blood,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB−,Platelets,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_002,AB−,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O+,Whole Blood,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O+,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O+,Plasma,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O−,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O−,Platelets,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,O−,Plasma,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A+,Packed Red Blood Cells,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A+,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A+,Platelets,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A+,Plasma,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A−,Packed Red Blood Cells,3,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A−,Whole Blood,17,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A−,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,A−,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B+,Packed Red Blood Cells,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B+,Whole Blood,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B+,Platelets,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B+,Plasma,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B−,Whole Blood,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B−,Platelets,14,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,B−,Plasma,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB+,Packed Red Blood Cells,4,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB+,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB+,Platelets,12,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB+,Plasma,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB−,Packed Red Blood Cells,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB−,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB−,Platelets,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_003,AB−,Plasma,6,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O+,Packed Red Blood Cells,9,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O+,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O+,Platelets,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O+,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O−,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O−,Whole Blood,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O−,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,O−,Plasma,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A+,Packed Red Blood Cells,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A+,Whole Blood,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A+,Platelets,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A+,Plasma,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A−,Packed Red Blood Cells,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A−,Whole Blood,13,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A−,Platelets,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,A−,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B+,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B+,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B+,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B+,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B−,Packed Red Blood Cells,5,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B−,Whole Blood,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B−,Platelets,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,B−,Plasma,9,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB+,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB+,Whole Blood,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB+,Platelets,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB+,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB−,Packed Red Blood Cells,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB−,Whole Blood,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB−,Platelets,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_004,AB−,Plasma,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O+,Packed Red Blood Cells,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O+,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O+,Platelets,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O+,Plasma,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O−,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O−,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O−,Platelets,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,O−,Plasma,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A+,Packed Red Blood Cells,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A+,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A+,Platelets,5,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A+,Plasma,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A−,Packed Red Blood Cells,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A−,Whole Blood,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A−,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,A−,Plasma,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B+,Packed Red Blood Cells,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B+,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B+,Platelets,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B+,Plasma,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B−,Packed Red Blood Cells,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B−,Whole Blood,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B−,Platelets,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,B−,Plasma,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB+,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB+,Whole Blood,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB+,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB+,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB−,Packed Red Blood Cells,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB−,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB−,Platelets,8,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_005,AB−,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O+,Packed Red Blood Cells,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O+,Whole Blood,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O+,Platelets,5,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O+,Plasma,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O−,Packed Red Blood Cells,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O−,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O−,Platelets,5,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,O−,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A+,Packed Red Blood Cells,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A+,Whole Blood,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A+,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A+,Plasma,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A−,Packed Red Blood Cells,10,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A−,Whole Blood,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A−,Platelets,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,A−,Plasma,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B+,Packed Red Blood Cells,10,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B+,Whole Blood,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B+,Platelets,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B+,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B−,Packed Red Blood Cells,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B−,Whole Blood,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B−,Platelets,15,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,B−,Plasma,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB+,Packed Red Blood Cells,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB+,Whole Blood,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB+,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB+,Plasma,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB−,Packed Red Blood Cells,17,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB−,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB−,Platelets,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_006,AB−,Plasma,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O+,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O+,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O+,Platelets,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O+,Plasma,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O−,Packed Red Blood Cells,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O−,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O−,Platelets,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,O−,Plasma,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A+,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A+,Whole Blood,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A+,Platelets,7,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A+,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A−,Packed Red Blood Cells,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A−,Whole Blood,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A−,Platelets,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,A−,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B+,Packed Red Blood Cells,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B+,Whole Blood,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B+,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B+,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B−,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B−,Platelets,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,B−,Plasma,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB+,Packed Red Blood Cells,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB+,Whole Blood,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB+,Platelets,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB+,Plasma,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB−,Packed Red Blood Cells,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB−,Whole Blood,13,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB−,Platelets,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_007,AB−,Plasma,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O+,Packed Red Blood Cells,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O+,Whole Blood,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O+,Platelets,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O+,Plasma,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O−,Whole Blood,7,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O−,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,O−,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A+,Packed Red Blood Cells,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A+,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A+,Platelets,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A+,Plasma,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A−,Packed Red Blood Cells,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A−,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A−,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,A−,Plasma,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B+,Packed Red Blood Cells,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B+,Whole Blood,7,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B+,Platelets,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B+,Plasma,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B−,Packed Red Blood Cells,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B−,Whole Blood,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B−,Platelets,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,B−,Plasma,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB+,Packed Red Blood Cells,6,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB+,Whole Blood,12,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB+,Platelets,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB+,Plasma,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB−,Packed Red Blood Cells,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB−,Whole Blood,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB−,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_008,AB−,Plasma,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O+,Whole Blood,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O+,Platelets,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O+,Plasma,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O−,Packed Red Blood Cells,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O−,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O−,Platelets,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,O−,Plasma,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A+,Packed Red Blood Cells,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A+,Whole Blood,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A+,Platelets,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A+,Plasma,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A−,Packed Red Blood Cells,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A−,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A−,Platelets,11,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,A−,Plasma,1,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B+,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B+,Whole Blood,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B+,Platelets,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B+,Plasma,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B−,Packed Red Blood Cells,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B−,Whole Blood,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B−,Platelets,12,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,B−,Plasma,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB+,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB+,Whole Blood,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB+,Platelets,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB+,Plasma,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB−,Packed Red Blood Cells,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB−,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB−,Platelets,19,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_009,AB−,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O+,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O+,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O+,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O−,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O−,Whole Blood,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O−,Platelets,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,O−,Plasma,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A+,Packed Red Blood Cells,2,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A+,Whole Blood,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A+,Platelets,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A+,Plasma,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A−,Packed Red Blood Cells,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A−,Whole Blood,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A−,Platelets,8,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,A−,Plasma,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B+,Packed Red Blood Cells,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B+,Whole Blood,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B+,Platelets,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B+,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B−,Packed Red Blood Cells,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B−,Whole Blood,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B−,Platelets,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,B−,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB+,Packed Red Blood Cells,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB+,Whole Blood,14,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB+,Platelets,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB+,Plasma,4,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB−,Whole Blood,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB−,Platelets,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_010,AB−,Plasma,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O+,Packed Red Blood Cells,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O+,Whole Blood,7,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O+,Platelets,3,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O+,Plasma,11,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O−,Packed Red Blood Cells,16,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O−,Whole Blood,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O−,Platelets,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,O−,Plasma,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A+,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A+,Whole Blood,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A+,Platelets,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A+,Plasma,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A−,Packed Red Blood Cells,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A−,Whole Blood,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A−,Platelets,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,A−,Plasma,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B+,Packed Red Blood Cells,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B+,Whole Blood,6,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B+,Platelets,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B+,Plasma,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B−,Packed Red Blood Cells,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B−,Whole Blood,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B−,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,B−,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB+,Packed Red Blood Cells,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB+,Whole Blood,15,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB+,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB+,Plasma,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB−,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB−,Whole Blood,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB−,Platelets,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_011,AB−,Plasma,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O+,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O+,Whole Blood,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O+,Platelets,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O+,Plasma,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O−,Packed Red Blood Cells,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O−,Whole Blood,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O−,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,O−,Plasma,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A+,Packed Red Blood Cells,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A+,Whole Blood,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A+,Platelets,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A+,Plasma,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A−,Packed Red Blood Cells,21,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A−,Whole Blood,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A−,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,A−,Plasma,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B+,Packed Red Blood Cells,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B+,Whole Blood,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B+,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B+,Plasma,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B−,Packed Red Blood Cells,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B−,Whole Blood,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B−,Platelets,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,B−,Plasma,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB+,Packed Red Blood Cells,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB+,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB+,Platelets,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB+,Plasma,8,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB−,Packed Red Blood Cells,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB−,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB−,Platelets,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_012,AB−,Plasma,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O+,Packed Red Blood Cells,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O+,Whole Blood,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O+,Platelets,17,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O+,Plasma,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O−,Packed Red Blood Cells,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O−,Whole Blood,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O−,Platelets,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,O−,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A+,Packed Red Blood Cells,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A+,Whole Blood,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A+,Platelets,19,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A+,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A−,Whole Blood,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A−,Platelets,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,A−,Plasma,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B+,Packed Red Blood Cells,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B+,Whole Blood,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B+,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B+,Plasma,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B−,Packed Red Blood Cells,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B−,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B−,Platelets,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,B−,Plasma,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB+,Packed Red Blood Cells,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB+,Whole Blood,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB+,Platelets,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB+,Plasma,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB−,Packed Red Blood Cells,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB−,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB−,Platelets,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_013,AB−,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O+,Packed Red Blood Cells,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O+,Whole Blood,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O+,Platelets,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O+,Plasma,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O−,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O−,Whole Blood,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O−,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,O−,Plasma,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A+,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A+,Whole Blood,3,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A+,Platelets,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A+,Plasma,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A−,Packed Red Blood Cells,9,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A−,Whole Blood,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A−,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,A−,Plasma,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B+,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B+,Whole Blood,1,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B+,Platelets,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B+,Plasma,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B−,Whole Blood,2,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B−,Platelets,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,B−,Plasma,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB+,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB+,Whole Blood,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB+,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB+,Plasma,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB−,Packed Red Blood Cells,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB−,Whole Blood,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB−,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_014,AB−,Plasma,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O+,Packed Red Blood Cells,17,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O+,Whole Blood,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O+,Platelets,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O+,Plasma,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O−,Packed Red Blood Cells,0,2026-10-19,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O−,Whole Blood,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O−,Platelets,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,O−,Plasma,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A+,Packed Red Blood Cells,24,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A+,Whole Blood,10,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A+,Platelets,4,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A+,Plasma,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A−,Packed Red Blood Cells,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A−,Whole Blood,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A−,Platelets,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,A−,Plasma,11,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B+,Packed Red Blood Cells,20,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B+,Whole Blood,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B+,Platelets,12,2026-11-09,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B+,Plasma,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B−,Packed Red Blood Cells,20,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B−,Whole Blood,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B−,Platelets,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,B−,Plasma,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB+,Packed Red Blood Cells,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB+,Whole Blood,22,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB+,Platelets,25,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB+,Plasma,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB−,Packed Red Blood Cells,23,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB−,Whole Blood,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB−,Platelets,9,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB_EKM_015,AB−,Plasma,15,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB001,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB001,A+,Plasma,8,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB001,B+,Whole Blood,3,2026-11-02,2026-11-02,Simulated Demo Data,simulated
-BB002,O+,Packed Red Blood Cells,18,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB002,A+,Platelets,6,2026-11-02,2026-11-02,Simulated Demo Data,simulated
-BB004,A+,Packed Red Blood Cells,14,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB004,O+,Platelets,9,2026-11-02,2026-11-02,Simulated Demo Data,simulated
-BB005,O+,Packed Red Blood Cells,16,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB005,B+,Whole Blood,11,2026-11-08,2026-11-02,Simulated Demo Data,simulated
-BB006,A+,Platelets,4,2026-11-02,2026-11-02,Simulated Demo Data,simulated
-BB008,O+,Packed Red Blood Cells,13,2026-11-08,2026-11-02,Simulated Demo Data,simulated
+BB_EKM_001,O+,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,O+,Whole Blood,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,O+,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,O+,Plasma,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,O−,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,O−,Whole Blood,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,O−,Platelets,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,O−,Plasma,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A+,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A+,Whole Blood,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A+,Platelets,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A+,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A−,Packed Red Blood Cells,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A−,Whole Blood,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A−,Platelets,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,A−,Plasma,3,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B+,Packed Red Blood Cells,19,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B+,Whole Blood,18,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B+,Platelets,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B+,Plasma,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B−,Packed Red Blood Cells,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B−,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B−,Platelets,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,B−,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB+,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB+,Whole Blood,8,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB+,Platelets,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB+,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB−,Packed Red Blood Cells,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB−,Whole Blood,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB−,Platelets,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_001,AB−,Plasma,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O+,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O+,Whole Blood,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O+,Platelets,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O+,Plasma,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O−,Packed Red Blood Cells,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O−,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O−,Platelets,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,O−,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A+,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A+,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A+,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A+,Plasma,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A−,Packed Red Blood Cells,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A−,Whole Blood,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A−,Platelets,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,A−,Plasma,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B+,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B+,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B+,Platelets,6,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B+,Plasma,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B−,Packed Red Blood Cells,19,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B−,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B−,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,B−,Plasma,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB+,Packed Red Blood Cells,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB+,Whole Blood,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB+,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB+,Plasma,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB−,Whole Blood,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB−,Platelets,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_002,AB−,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O+,Whole Blood,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O+,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O+,Plasma,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O−,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O−,Platelets,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,O−,Plasma,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A+,Packed Red Blood Cells,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A+,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A+,Platelets,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A+,Plasma,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A−,Packed Red Blood Cells,3,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A−,Whole Blood,17,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A−,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,A−,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B+,Packed Red Blood Cells,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B+,Whole Blood,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B+,Platelets,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B+,Plasma,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B−,Whole Blood,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B−,Platelets,14,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,B−,Plasma,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB+,Packed Red Blood Cells,4,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB+,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB+,Platelets,12,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB+,Plasma,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB−,Packed Red Blood Cells,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB−,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB−,Platelets,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_003,AB−,Plasma,6,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O+,Packed Red Blood Cells,9,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O+,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O+,Platelets,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O+,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O−,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O−,Whole Blood,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O−,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,O−,Plasma,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A+,Packed Red Blood Cells,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A+,Whole Blood,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A+,Platelets,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A+,Plasma,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A−,Packed Red Blood Cells,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A−,Whole Blood,13,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A−,Platelets,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,A−,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B+,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B+,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B+,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B+,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B−,Packed Red Blood Cells,5,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B−,Whole Blood,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B−,Platelets,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,B−,Plasma,9,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB+,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB+,Whole Blood,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB+,Platelets,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB+,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB−,Packed Red Blood Cells,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB−,Whole Blood,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB−,Platelets,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_004,AB−,Plasma,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O+,Packed Red Blood Cells,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O+,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O+,Platelets,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O+,Plasma,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O−,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O−,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O−,Platelets,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,O−,Plasma,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A+,Packed Red Blood Cells,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A+,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A+,Platelets,5,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A+,Plasma,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A−,Packed Red Blood Cells,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A−,Whole Blood,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A−,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,A−,Plasma,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B+,Packed Red Blood Cells,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B+,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B+,Platelets,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B+,Plasma,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B−,Packed Red Blood Cells,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B−,Whole Blood,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B−,Platelets,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,B−,Plasma,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB+,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB+,Whole Blood,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB+,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB+,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB−,Packed Red Blood Cells,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB−,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB−,Platelets,8,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_005,AB−,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O+,Packed Red Blood Cells,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O+,Whole Blood,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O+,Platelets,5,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O+,Plasma,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O−,Packed Red Blood Cells,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O−,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O−,Platelets,5,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,O−,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A+,Packed Red Blood Cells,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A+,Whole Blood,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A+,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A+,Plasma,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A−,Packed Red Blood Cells,10,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A−,Whole Blood,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A−,Platelets,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,A−,Plasma,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B+,Packed Red Blood Cells,10,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B+,Whole Blood,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B+,Platelets,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B+,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B−,Packed Red Blood Cells,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B−,Whole Blood,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B−,Platelets,15,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,B−,Plasma,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB+,Packed Red Blood Cells,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB+,Whole Blood,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB+,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB+,Plasma,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB−,Packed Red Blood Cells,17,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB−,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB−,Platelets,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_006,AB−,Plasma,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O+,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O+,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O+,Platelets,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O+,Plasma,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O−,Packed Red Blood Cells,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O−,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O−,Platelets,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,O−,Plasma,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A+,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A+,Whole Blood,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A+,Platelets,7,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A+,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A−,Packed Red Blood Cells,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A−,Whole Blood,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A−,Platelets,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,A−,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B+,Packed Red Blood Cells,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B+,Whole Blood,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B+,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B+,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B−,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B−,Platelets,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,B−,Plasma,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB+,Packed Red Blood Cells,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB+,Whole Blood,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB+,Platelets,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB+,Plasma,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB−,Packed Red Blood Cells,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB−,Whole Blood,13,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB−,Platelets,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_007,AB−,Plasma,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O+,Packed Red Blood Cells,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O+,Whole Blood,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O+,Platelets,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O+,Plasma,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O−,Whole Blood,7,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O−,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,O−,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A+,Packed Red Blood Cells,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A+,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A+,Platelets,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A+,Plasma,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A−,Packed Red Blood Cells,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A−,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A−,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,A−,Plasma,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B+,Packed Red Blood Cells,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B+,Whole Blood,7,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B+,Platelets,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B+,Plasma,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B−,Packed Red Blood Cells,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B−,Whole Blood,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B−,Platelets,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,B−,Plasma,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB+,Packed Red Blood Cells,6,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB+,Whole Blood,12,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB+,Platelets,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB+,Plasma,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB−,Packed Red Blood Cells,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB−,Whole Blood,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB−,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_008,AB−,Plasma,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O+,Whole Blood,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O+,Platelets,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O+,Plasma,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O−,Packed Red Blood Cells,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O−,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O−,Platelets,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,O−,Plasma,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A+,Packed Red Blood Cells,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A+,Whole Blood,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A+,Platelets,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A+,Plasma,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A−,Packed Red Blood Cells,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A−,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A−,Platelets,11,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,A−,Plasma,1,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B+,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B+,Whole Blood,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B+,Platelets,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B+,Plasma,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B−,Packed Red Blood Cells,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B−,Whole Blood,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B−,Platelets,12,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,B−,Plasma,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB+,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB+,Whole Blood,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB+,Platelets,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB+,Plasma,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB−,Packed Red Blood Cells,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB−,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB−,Platelets,19,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_009,AB−,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O+,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O+,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O+,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O−,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O−,Whole Blood,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O−,Platelets,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,O−,Plasma,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A+,Packed Red Blood Cells,2,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A+,Whole Blood,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A+,Platelets,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A+,Plasma,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A−,Packed Red Blood Cells,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A−,Whole Blood,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A−,Platelets,8,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,A−,Plasma,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B+,Packed Red Blood Cells,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B+,Whole Blood,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B+,Platelets,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B+,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B−,Packed Red Blood Cells,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B−,Whole Blood,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B−,Platelets,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,B−,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB+,Packed Red Blood Cells,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB+,Whole Blood,14,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB+,Platelets,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB+,Plasma,4,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB−,Whole Blood,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB−,Platelets,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_010,AB−,Plasma,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O+,Packed Red Blood Cells,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O+,Whole Blood,7,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O+,Platelets,3,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O+,Plasma,11,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O−,Packed Red Blood Cells,16,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O−,Whole Blood,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O−,Platelets,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,O−,Plasma,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A+,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A+,Whole Blood,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A+,Platelets,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A+,Plasma,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A−,Packed Red Blood Cells,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A−,Whole Blood,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A−,Platelets,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,A−,Plasma,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B+,Packed Red Blood Cells,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B+,Whole Blood,6,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B+,Platelets,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B+,Plasma,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B−,Packed Red Blood Cells,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B−,Whole Blood,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B−,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,B−,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB+,Packed Red Blood Cells,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB+,Whole Blood,15,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB+,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB+,Plasma,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB−,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB−,Whole Blood,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB−,Platelets,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_011,AB−,Plasma,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O+,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O+,Whole Blood,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O+,Platelets,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O+,Plasma,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O−,Packed Red Blood Cells,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O−,Whole Blood,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O−,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,O−,Plasma,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A+,Packed Red Blood Cells,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A+,Whole Blood,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A+,Platelets,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A+,Plasma,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A−,Packed Red Blood Cells,21,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A−,Whole Blood,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A−,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,A−,Plasma,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B+,Packed Red Blood Cells,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B+,Whole Blood,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B+,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B+,Plasma,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B−,Packed Red Blood Cells,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B−,Whole Blood,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B−,Platelets,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,B−,Plasma,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB+,Packed Red Blood Cells,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB+,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB+,Platelets,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB+,Plasma,8,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB−,Packed Red Blood Cells,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB−,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB−,Platelets,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_012,AB−,Plasma,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O+,Packed Red Blood Cells,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O+,Whole Blood,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O+,Platelets,17,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O+,Plasma,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O−,Packed Red Blood Cells,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O−,Whole Blood,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O−,Platelets,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,O−,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A+,Packed Red Blood Cells,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A+,Whole Blood,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A+,Platelets,19,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A+,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A−,Whole Blood,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A−,Platelets,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,A−,Plasma,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B+,Packed Red Blood Cells,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B+,Whole Blood,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B+,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B+,Plasma,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B−,Packed Red Blood Cells,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B−,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B−,Platelets,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,B−,Plasma,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB+,Packed Red Blood Cells,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB+,Whole Blood,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB+,Platelets,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB+,Plasma,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB−,Packed Red Blood Cells,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB−,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB−,Platelets,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_013,AB−,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O+,Packed Red Blood Cells,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O+,Whole Blood,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O+,Platelets,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O+,Plasma,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O−,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O−,Whole Blood,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O−,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,O−,Plasma,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A+,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A+,Whole Blood,3,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A+,Platelets,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A+,Plasma,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A−,Packed Red Blood Cells,9,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A−,Whole Blood,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A−,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,A−,Plasma,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B+,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B+,Whole Blood,1,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B+,Platelets,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B+,Plasma,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B−,Whole Blood,2,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B−,Platelets,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,B−,Plasma,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB+,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB+,Whole Blood,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB+,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB+,Plasma,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB−,Packed Red Blood Cells,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB−,Whole Blood,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB−,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_014,AB−,Plasma,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O+,Packed Red Blood Cells,17,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O+,Whole Blood,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O+,Platelets,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O+,Plasma,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O−,Packed Red Blood Cells,0,2026-10-19,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O−,Whole Blood,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O−,Platelets,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,O−,Plasma,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A+,Packed Red Blood Cells,24,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A+,Whole Blood,10,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A+,Platelets,4,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A+,Plasma,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A−,Packed Red Blood Cells,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A−,Whole Blood,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A−,Platelets,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,A−,Plasma,11,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B+,Packed Red Blood Cells,20,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B+,Whole Blood,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B+,Platelets,12,2026-11-09,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B+,Plasma,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B−,Packed Red Blood Cells,20,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B−,Whole Blood,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B−,Platelets,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,B−,Plasma,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB+,Packed Red Blood Cells,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB+,Whole Blood,22,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB+,Platelets,25,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB+,Plasma,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB−,Packed Red Blood Cells,23,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB−,Whole Blood,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB−,Platelets,9,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB_EKM_015,AB−,Plasma,15,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB001,O+,Packed Red Blood Cells,12,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB001,A+,Plasma,8,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB001,B+,Whole Blood,3,2026-11-02,2026-11-03,Simulated Demo Data,simulated
+BB002,O+,Packed Red Blood Cells,18,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB002,A+,Platelets,6,2026-11-02,2026-11-03,Simulated Demo Data,simulated
+BB004,A+,Packed Red Blood Cells,14,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB004,O+,Platelets,9,2026-11-02,2026-11-03,Simulated Demo Data,simulated
+BB005,O+,Packed Red Blood Cells,16,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB005,B+,Whole Blood,11,2026-11-08,2026-11-03,Simulated Demo Data,simulated
+BB006,A+,Platelets,4,2026-11-02,2026-11-03,Simulated Demo Data,simulated
+BB008,O+,Packed Red Blood Cells,13,2026-11-08,2026-11-03,Simulated Demo Data,simulated
